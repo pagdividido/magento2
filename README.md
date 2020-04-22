@@ -18,7 +18,7 @@ composer require fluxxbrasil/magento2
 
 ### Manually
 
-1. [Download](archive/master.zip)
+1. [Download](https://github.com/DevMagentoFluxx/magento2/archive/master.zip)
 2. On your computer unzip the file
 3. Navigate to the [root directory](https://devdocs.magento.com/guides/v2.3/install-gde/basics/basics_docroot.html) of the Magento 2
 4. On your server create folder Fluxx in public_html/app/code/

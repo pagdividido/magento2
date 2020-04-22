@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="fluxx_payment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[<div class="fluxx-payment-logo"></div><div class="fluxx-payment-byline">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>]]></label>
+                <fieldset_css>complex fluxx-payment-section</fieldset_css>
+                <frontend_model>Magento\Paypal\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>
+                <group id="attribute_relationship" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Attribute Relationship Definition</label>
+                    <comment>List the attributes of your Magento the data expected by our API</comment>
+                    <field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The CPF will be an attribute obtained from the</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
+                        <config_path>payment/fluxx_attribute_relationship/type_cpf</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="cpf_for_address" translate="label select" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The CPF attribute is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
+                        <depends>
+                            <field id="*/*/*/type_cpf">address</field>
+                        </depends>
+                        <config_path>payment/fluxx_attribute_relationship/cpf_for_address</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="cpf_for_customer" translate="label select" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The CPF attribute is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
+                        <depends>
+                            <field id="*/*/*/type_cpf">customer</field>
+                        </depends>
+                        <config_path>payment/fluxx_attribute_relationship/cpf_for_customer</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="street" translate="label select" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The Street attribute is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/fluxx_attribute_relationship/street</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field> 
+                    <field id="street_number" translate="label select" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The address number is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/fluxx_attribute_relationship/streetNumber</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="district" translate="label select" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The address district is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/fluxx_attribute_relationship/district</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="complement" translate="label select" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>The address complement is</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/fluxx_attribute_relationship/complement</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                </group>
+                <group id="fluxx_magento2" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Fluxx - Boleto Parcelado</label>
+                        <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Enabled</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/fluxx_magento2/active</config_path>
+                        </field>
+                        <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Title</label>
+                            <config_path>payment/fluxx_magento2/title</config_path>
+                        </field>
+                        <field id="debug" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Debug</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/fluxx_magento2/debug</config_path>
+                        </field>
+                        <field id="payment_action" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Payment Action</label>
+                            <source_model>Fluxx\Magento2\Model\Adminhtml\Source\PaymentAction</source_model>
+                            <config_path>payment/fluxx_magento2/payment_action</config_path>
+                        </field>
+                        <field id="min_order_total" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Minimum Order Total</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <config_path>payment/fluxx_magento2/min_order_total</config_path>
+                        </field>
+                        <field id="max_order_total" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Maximum Order Total</label>
+                            <validate>validate-number validate-zero-or-greater</validate>
+                            <config_path>payment/fluxx_magento2/max_order_total</config_path>
+                        </field>
+                        <field id="allowspecific" translate="label" type="allowspecific" sortOrder="120" showInDefault="9" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Payment From Applicable Countries</label>
+                            <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                            <config_path>payment/fluxx_magento2/allowspecific</config_path>
+                        </field>
+                        <field id="specificcountry" translate="label" type="multiselect" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Payment From Specific Countries</label>
+                            <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                            <config_path>payment/fluxx_magento2/specificcountry</config_path>
+                        </field>
+                        <field id="sort_order" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                            <label>Sort Order</label>
+                            <frontend_class>validate-number</frontend_class>
+                            <config_path>payment/fluxx_magento2/sort_order</config_path>
+                        </field>
+                </group>
+                <group id="credentials" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credentials</label>
+                    <field id="environment" translate="label select comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Environment</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
+                        <config_path>payment/fluxx_credentials/environment</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="merchant_gateway_username" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Username</label>
+                        <depends>
+                            <field id="*/*/*/environment">production</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_username</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_key" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends>
+                            <field id="*/*/*/environment">production</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_key</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_username_sandbox" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Username - Sandbox</label>
+                        <depends>
+                            <field id="*/*/*/environment">sandbox</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_username_sandbox</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_key_sandbox" translate="label" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Key - Sandbox</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends>
+                            <field id="*/*/*/environment">sandbox</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_key_sandbox</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

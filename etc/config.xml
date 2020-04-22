@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <fluxx_magento2>
+                <debug>1</debug>
+                <active>1</active>
+                <merchant_gateway_key backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <merchant_gateway_key_sandbox backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <model>Magento2Facade</model>
+                <order_status>payment_review</order_status>
+                <payment_action>authorize</payment_action>
+                <title>Boleto Parcelado via Fluxx</title>
+                <currency>BRL</currency>
+                <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
+                <paymentInfoKeys>financing_name,rg,dob,financing,device,birth_city,birth_region,gender</paymentInfoKeys>
+                <privateInfoKeys>financing,device,birth_city,birth_region,gender</privateInfoKeys>
+                <is_gateway>1</is_gateway>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <can_capture_partial>0</can_capture_partial>
+                <can_refund_partial_per_invoice>0</can_refund_partial_per_invoice>
+                <can_refund>0</can_refund>
+                <can_void>1</can_void>
+                <can_cancel>1</can_cancel>
+                <can_review_payment>1</can_review_payment>
+                <can_deny_payment>1</can_deny_payment>
+                <can_accept_payment>1</can_accept_payment>
+                <min_order_total>2000</min_order_total>
+                <max_order_total>200000</max_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <group>fluxx_group</group>
+            </fluxx_magento2>
+        </payment>
+    </default>
+</config>

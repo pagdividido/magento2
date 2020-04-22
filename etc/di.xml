@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Payment Method Facade configuration -->
+    <virtualType name="Magento2Facade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="const">Fluxx\Magento2\Model\Ui\ConfigProvider::CODE</argument>
+            <argument name="formBlockType" xsi:type="string">Fluxx\Magento2\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Fluxx\Magento2\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">Magento2ValueHandlerPool</argument>
+            <argument name="commandPool" xsi:type="object">Magento2CommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Configuration reader -->
+    <virtualType name="Magento2Config" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\Fluxx\Magento2\Model\Ui\ConfigProvider::CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Logger, initialized with Magento2Config -->
+    <virtualType name="Magento2Logger" type="Magento\Payment\Model\Method\Logger">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Fluxx\Magento2\Gateway\Http\Client\AuthorizeClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Fluxx\Magento2\Gateway\Http\Client\CheckClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Fluxx\Magento2\Gateway\Http\Client\AcceptPaymentClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <!-- Commands infrastructure -->
+    <virtualType name="Magento2CommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">Magento2AuthorizeCommand</item>
+                <item name="accept_payment" xsi:type="string">Magento2AcceptPaymentCommand</item>
+                <item name="deny_payment" xsi:type="string">Magento2DenyPaymentCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Accept Payment Command -->
+    <virtualType name="Magento2AcceptPaymentCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Magento2AcceptPaymentRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Fluxx\Magento2\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Fluxx\Magento2\Gateway\Http\Client\AcceptPaymentClient</argument>
+            <argument name="handler" xsi:type="object">Magento2AccpetPaymentResponseHandlerComposite</argument>
+            <argument name="validator" xsi:type="object">Magento2TransactionValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">Magento2VirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Accept Payment Request -->
+    <virtualType name="Magento2AcceptPaymentRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Fluxx\Magento2\Gateway\Request\AuthorizationRequest</item>
+                <item name="detailTotals" xsi:type="string">Fluxx\Magento2\Gateway\Request\DetailTotalsDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Fluxx\Magento2\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </type>
+    <!-- Accept Payment handlers -->
+    <virtualType name="Magento2AccpetPaymentResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="accept" xsi:type="string">Fluxx\Magento2\Gateway\Response\AcceptPaymentHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+     <!-- Deny Payment Command -->
+    <virtualType name="Magento2DenyPaymentCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Magento2DenyPaymentRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Fluxx\Magento2\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Fluxx\Magento2\Gateway\Http\Client\DenyPaymentClient</argument>
+            <argument name="handler" xsi:type="object">Magento2DenyPaymentResponseHandlerComposite</argument>
+            <argument name="validator" xsi:type="object">Magento2TransactionValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">Magento2VirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Deny Payment Request -->
+    <virtualType name="Magento2DenyPaymentRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Fluxx\Magento2\Gateway\Request\AuthorizationRequest</item>
+                <item name="detailTotals" xsi:type="string">Fluxx\Magento2\Gateway\Request\DetailTotalsDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Fluxx\Magento2\Gateway\Request\Magento2DenyPaymentRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </type>
+    <!-- Deny Payment handlers -->
+    <virtualType name="Magento2DenyPaymentResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="accept" xsi:type="string">Fluxx\Magento2\Gateway\Response\DenyPaymentHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorize command -->
+    <virtualType name="Magento2AuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Magento2AuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">Magento2ResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Fluxx\Magento2\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Fluxx\Magento2\Gateway\Http\Client\AuthorizeClient</argument>
+            <argument name="validator" xsi:type="object">Magento2TransactionValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">Magento2VirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+    <!-- Authorization Request -->
+    <virtualType name="Magento2AuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Fluxx\Magento2\Gateway\Request\AuthorizationRequest</item>
+                <item name="taxDocument" xsi:type="string">Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest</item>
+                <item name="customer" xsi:type="string">Fluxx\Magento2\Gateway\Request\CustomerDataRequest</item>
+                <item name="address" xsi:type="string">Fluxx\Magento2\Gateway\Request\AddressDataRequest</item>
+                <item name="device" xsi:type="string">Fluxx\Magento2\Gateway\Request\DeviceDataRequest</item>
+                <item name="purchasedItems" xsi:type="string">Fluxx\Magento2\Gateway\Request\PurchasedItemsDataRequest</item>
+                <item name="detailTotals" xsi:type="string">Fluxx\Magento2\Gateway\Request\DetailTotalsDataRequest</item>
+                <item name="payerData" xsi:type="string">Fluxx\Magento2\Gateway\Request\PayerDataRequest</item>
+                <item name="merchantData" xsi:type="string">Fluxx\Magento2\Gateway\Request\MerchantDataRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Fluxx\Magento2\Gateway\Request\AuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </type>
+    <!-- Authorization Response handlers -->
+    <virtualType name="Magento2ResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txnid" xsi:type="string">Fluxx\Magento2\Gateway\Response\TxnIdHandler</item>
+                <item name="extordid" xsi:type="string">Fluxx\Magento2\Gateway\Response\ExtOrdIdHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Value handlers infrastructure -->
+    <virtualType name="Magento2ValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento2ConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento2ConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Block Info -->
+    <type name="Fluxx\Magento2\Block\Info">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2Config</argument>
+        </arguments>
+    </type>
+
+     <!-- Error Mapping -->
+    <virtualType name="Magento2ErrorMappingConfigReader" type="Magento\Payment\Gateway\ErrorMapper\VirtualConfigReader">
+        <arguments>
+            <argument name="fileName" xsi:type="string">fluxx_error_mapping.xml</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento2ErrorMappingData" type="Magento\Payment\Gateway\ErrorMapper\MappingData">
+        <arguments>
+            <argument name="reader" xsi:type="object">Magento2ErrorMappingConfigReader</argument>
+            <argument name="cacheId" xsi:type="string">fluxx_error_mapper</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento2VirtualErrorMessageMapper" type="Magento\Payment\Gateway\ErrorMapper\ErrorMessageMapper">
+        <arguments>
+            <argument name="messageMapping" xsi:type="object">Magento2ErrorMappingData</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Validator -->
+    <virtualType name="Magento2TransactionValidator" type="Magento\Payment\Gateway\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="chainBreakingValidators" xsi:type="array">
+                <item name="general" xsi:type="boolean">true</item>
+            </argument>
+            <argument name="validators" xsi:type="array">
+                <item name="general" xsi:type="string">Fluxx\Magento2\Gateway\Validator\GeneralResponseValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

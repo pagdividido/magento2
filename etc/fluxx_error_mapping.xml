@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+    	<!-- Customer data -->
+    	<message code="email" translate="true">The email is required</message>
+        <message code="fullname" translate="true">The fullname is required</message>
+        <message code="countryCode" translate="true">The phone country code is required</message>
+        <message code="areaCode" translate="true">The phone area code is required</message>
+        <message code="number" translate="true">The phone number is required</message>
+        <message code="birthDate" translate="true">The birth date is required</message>
+        <message code="taxDocument" translate="true">The CPF is required</message>
+        <message code="zipCode" translate="true">The Postcode is required</message>
+        <message code="street" translate="true">The address street is required</message>
+        <message code="streetNumber" translate="true">The address number is required</message>
+        <message code="district" translate="true">The address district is required</message>
+        <message code="city" translate="true">The address city is required</message>
+        <message code="country" translate="true">The address country is required</message>
+        <!-- Order data -->
+        <message code="ownId" translate="true">The Own Id is required</message>
+        <message code="items" translate="true">The items purchased is required</message>
+        <message code="product" translate="true">The purchased products is required</message>
+        <message code="quantity" translate="true">The quantity of products purchased is required</message>
+        <message code="price" translate="true">The price of products purchased is required</message>
+        <message code="amount" translate="true">The purchase amounts is required</message>
+        <message code="total" translate="true">The total purchase is required</message>
+        <message code="subtotals" translate="true">The subtotal purchase is required</message>
+        <!-- Payment data -->
+        <message code="birthCity" translate="true">The place of birth (city) is required</message>
+        <message code="birthState" translate="true">The place of birth (state/region) is required</message>
+        <message code="offerUUID" translate="true">The financing option is required</message>
+    </message_list>
+</mapping>

@@ -1,0 +1,25 @@
+/**
+ * Copyright Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+*/
+.complex.fluxx-payment-section 
+		.heading strong{
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			font-weight: normal;
+		}
+.complex.fluxx-payment-section 
+		.fluxx-payment-logo {
+			flex-basis: 17%;
+		    height: 55px;
+		    display: inline-block;
+			background: url('images/logo.svg') no-repeat;
+		}
+.complex.fluxx-payment-section 
+		.fluxx-payment-byline {
+		    flex-basis: 83%;
+		}
+
+.complex.fluxx-payment-section .button-container { float:right; }
+

@@ -1,0 +1,114 @@
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<div class="field required">
+    <label data-bind="attr: {for: getCode() + '_dob'}" class="label">
+          <span><!-- ko i18n: 'Date of Birth (dd/mm/yyyy)'--><!-- /ko --></span>
+    </label>
+    <div class="control">
+        <input  name="payment[dob]"
+                type="text"
+                class="input-text" value=""
+                data-bind="attr: {
+                            autocomplete: off,
+                            id: getCode() + '_dob',
+                            title: $t('Date of Birth'),
+                            'data-validate': JSON.stringify({'required':true})
+                          },
+                          value: dob"/>
+    </div>
+</div>
+
+<div class="field required">
+    <label data-bind="attr: {for: getCode() + '_rg'}" class="label">
+      <span><!-- ko i18n: 'R.G (Brazilian document)'--><!-- /ko --></span>
+    </label>
+    <div class="control">
+        <input  name="payment[rg]"
+                type="text"
+                class="input-text" value=""
+                data-bind="attr: {
+                            autocomplete: off,
+                            id: getCode() + '_rg',
+                            title: $t('R.G (Brazilian document)'),
+                            'data-validate': JSON.stringify({'required':true})
+                          },
+                          value: rg"/>
+    </div>
+</div>
+
+<div class="field required">
+    <label data-bind="attr: {for: getCode() + '_birth_city'}" class="label">
+          <span><!-- ko i18n: 'City where you were born'--><!-- /ko --></span>
+    </label>
+    <div class="control">
+        <input  name="payment[birth_city]"
+                type="text"
+                class="input-text" value=""
+                data-bind="attr: {
+                          autocomplete: off,
+                          id: getCode() + '_birth_city',
+                          title: $t('City where you were born'),
+                          'data-validate': JSON.stringify({'required':true})
+                        },
+                        value: birthCity"/>
+    </div>
+</div>
+
+<div class="field required">
+    <label data-bind="attr: {for: getCode() + '_birth_region'}" class="label">
+          <span><!-- ko i18n: 'State/Region where you were born'--><!-- /ko --></span>
+    </label>
+    <div class="control">
+        <select name="payment[birth_region]"
+                class="select"
+                data-bind="
+                          attr: {id: getCode() + '_birth_region', 'data-validate': JSON.stringify({required:true})},
+                          options: getBirthRegion(),
+                          optionsValue: 'value',
+                          optionsText: 'birth_region',
+                          optionsCaption: $t('State/Region where you were born'),
+                          value: birthRegion"
+                          >
+        </select>
+    </div>
+</div>
+
+<div class="field required">
+    <label data-bind="attr: {for: getCode() + '_financing'}" class="label">
+        <span><!-- ko i18n: 'Select the installment offer'--><!-- /ko --></span>
+    </label>
+    <div class="control">
+        <select name="payment[financing]"
+                class="select"
+                data-bind="
+                          attr: {id: getCode() + '_financing', 'data-validate': JSON.stringify({required:true})},
+                          options: getFinancing(),
+                          optionsValue: 'value',
+                          optionsText: 'financing',
+                          optionsCaption: $t('Select the installment offer'),
+                          value: financing"
+                          >
+        </select>
+    </div>
+</div>
+
+<div class="field" data-bind="attr: {id: getCode() + '_financing_name_global', style: 'display: none'}">
+    <dt class="title"><!-- ko i18n: 'Financing offered by' --><!-- /ko --></dt>
+    <dd class="content">
+        <div class="financing-name" 
+             data-bind="
+                        attr: {id: getCode() + '_financing_name'}">
+        </div>
+        <input  name="payment[financing_name]"  type="hidden" class="input-text" value="" data-bind="attr: {
+                            autocomplete: off,
+                            id: getCode() + '_financing_name_value',
+                            title: $t('Financing offered by'),
+                            'data-validate': JSON.stringify({'required':true})
+                          },
+                          value: financingName"/>
+    </dd>
+</div>

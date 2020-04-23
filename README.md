@@ -2,6 +2,8 @@
 
 ## Extension features
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9ca416ca6b04eaca9b2c94cf61b5e2b)](https://app.codacy.com/manual/DevMagentoFluxx/magento2?utm_source=github.com&utm_medium=referral&utm_content=DevMagentoFluxx/magento2&utm_campaign=Badge_Grade_Dashboard)
+
 1. Installment payment slip for your client
 2. Payment method without redirection
 3. Automatic status return

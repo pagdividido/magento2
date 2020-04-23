@@ -30,11 +30,9 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
     /**
      * Returns Options.
      *
-     * @param bool $isMultiselect
-     *
      * @return array | attributesArrays
      */
-    public function toOptionArray($isMultiselect = false)
+    public function toOptionArray()
     {
         $customer_attributes = $this->objectManager->get('Magento\Customer\Model\Customer')->getAttributes();
         $attributesArrays = [];

@@ -3,15 +3,13 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Block\Adminhtml\System\Config;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Customer\Model;
 use Magento\Framework\ObjectManagerInterface;
 
 /**
- * Class CustomerMap
+ * Class CustomerMap.
  */
 class CustomerMap implements \Magento\Framework\Option\ArrayInterface
 {
@@ -21,7 +19,6 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
     protected $objectManager;
 
     /**
-     * 
      * @param ObjectManagerInterface $objectManager
      */
     public function __construct(
@@ -31,9 +28,10 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
     }
 
     /**
-     * Returns Options
+     * Returns Options.
      *
      * @param bool $isMultiselect
+     *
      * @return array | attributesArrays
      */
     public function toOptionArray($isMultiselect = false)
@@ -44,9 +42,9 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
 
         foreach ($customer_attributes as $cal=>$val) {
             $attributesArrays[] = [
-                   'label' => $cal,
-                   'value' => $cal
-               ];
+                'label' => $cal,
+                'value' => $cal,
+            ];
         }
 
         return $attributesArrays;

@@ -3,21 +3,24 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Validator;
 
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
 
 /**
- * Class ResponseCodeValidator
+ * Class ResponseCodeValidator.
  */
 class ResponseCodeValidator extends AbstractValidator
 {
     const RESULT_CODE = 'RESULT_CODE';
 
     /**
-     * Validation
+     * Validation.
+     *
      * @param array $validationSubject
+     *
      * @return ResultInterface
      */
     public function validate(array $validationSubject)
@@ -43,6 +46,7 @@ class ResponseCodeValidator extends AbstractValidator
 
     /**
      * @param array $response
+     *
      * @return bool
      */
     private function isSuccessfulTransaction(array $response)

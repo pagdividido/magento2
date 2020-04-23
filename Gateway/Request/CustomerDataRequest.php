@@ -3,14 +3,15 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
 use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
+use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class CustomerAddressDataRequest
+ * Class CustomerAddressDataRequest.
  */
 class CustomerDataRequest implements BuilderInterface
 {
@@ -20,7 +21,7 @@ class CustomerDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * Customer block name
+     * Customer block name.
      */
     public const CUSTOMER = 'customer';
 
@@ -45,9 +46,9 @@ class CustomerDataRequest implements BuilderInterface
     const FULL_NAME = 'fullname';
 
     /**
-    * The customer birth Date. Date Y-MM-dd
-    */
-    const BIRTH_DATE ="birthDate";
+     * The customer birth Date. Date Y-MM-dd.
+     */
+    const BIRTH_DATE = 'birthDate';
 
     /**
      * The customer’s company. 255 character maximum.
@@ -60,7 +61,7 @@ class CustomerDataRequest implements BuilderInterface
     const EMAIL = 'email';
 
     /**
-     * Phone block name
+     * Phone block name.
      */
     const PHONE = 'phone';
 
@@ -80,12 +81,12 @@ class CustomerDataRequest implements BuilderInterface
     const PHONE_NUMBER = 'number';
 
     /**
-    * @var OrderAdapterFactory
-    */
+     * @var OrderAdapterFactory
+     */
     private $orderAdapterFactory;
 
     /**
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
      */
     public function __construct(
@@ -95,7 +96,7 @@ class CustomerDataRequest implements BuilderInterface
         $this->subjectReader = $subjectReader;
         $this->orderAdapterFactory = $orderAdapterFactory;
     }
-  
+
     /*
      * Number or DDD
      * @param param_telefone full phone number, return_ddd is true return DDD, is false return Number
@@ -103,18 +104,18 @@ class CustomerDataRequest implements BuilderInterface
 
     public function getNumberOrDDD($param_telefone, $return_ddd = false)
     {
-        $cust_ddd       = '11';
-        $cust_telephone = preg_replace("/[^0-9]/", "", $param_telefone);
+        $cust_ddd = '11';
+        $cust_telephone = preg_replace('/[^0-9]/', '', $param_telefone);
         if (strlen($cust_telephone) == 11) {
-            $st             = strlen($cust_telephone) - 9;
-            $indice         = 9;
+            $st = strlen($cust_telephone) - 9;
+            $indice = 9;
         } else {
-            $st             = strlen($cust_telephone) - 8;
-            $indice         = 8;
+            $st = strlen($cust_telephone) - 8;
+            $indice = 8;
         }
-        
+
         if ($st > 0) {
-            $cust_ddd       = substr($cust_telephone, 0, 2);
+            $cust_ddd = substr($cust_telephone, 0, 2);
             $cust_telephone = substr($cust_telephone, $st, $indice);
         }
         if ($return_ddd === false) {
@@ -122,26 +123,29 @@ class CustomerDataRequest implements BuilderInterface
         } else {
             $retorno = $cust_ddd;
         }
+
         return $retorno;
     }
 
     /**
-     * StructurePhone
+     * StructurePhone.
+     *
      * @param  $phone full phone number,
      * @param  $defaultCountryCode,
+     *
      * @return array
      */
     public function structurePhone($phone, $defaultCountryCode)
     {
         return [
-                self::PHONE_CONNTRY_CODE => (int)$defaultCountryCode,
-                self::PHONE_AREA_CODE => (int)$this->getNumberOrDDD($phone, true),
-                self::PHONE_NUMBER => (int)$this->getNumberOrDDD($phone)
+            self::PHONE_CONNTRY_CODE => (int) $defaultCountryCode,
+            self::PHONE_AREA_CODE    => (int) $this->getNumberOrDDD($phone, true),
+            self::PHONE_NUMBER       => (int) $this->getNumberOrDDD($phone),
         ];
     }
-    
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
@@ -161,16 +165,16 @@ class CustomerDataRequest implements BuilderInterface
         }
 
         $dob = $orderAdapter->getCustomerDob() ? date('Y-m-d', strtotime($orderAdapter->getCustomerDob())) : '1985-10-10';
-        
+
         return [
             self::CUSTOMER => [
-                self::OWN_ID => $billingAddress->getEmail(),
-                self::FULL_NAME => $billingAddress->getFirstname() . ' '. $billingAddress->getLastname(),
-                self::COMPANY => $billingAddress->getCompany(),
-                self::PHONE => [$this->structurePhone($billingAddress->getTelephone(), $defaultCountryCode)],
-                self::EMAIL => $billingAddress->getEmail(),
-                self::BIRTH_DATE => $dob
-            ]
+                self::OWN_ID     => $billingAddress->getEmail(),
+                self::FULL_NAME  => $billingAddress->getFirstname().' '.$billingAddress->getLastname(),
+                self::COMPANY    => $billingAddress->getCompany(),
+                self::PHONE      => [$this->structurePhone($billingAddress->getTelephone(), $defaultCountryCode)],
+                self::EMAIL      => $billingAddress->getEmail(),
+                self::BIRTH_DATE => $dob,
+            ],
         ];
     }
 }

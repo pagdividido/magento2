@@ -3,16 +3,16 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest;
-use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
 use Fluxx\Magento2\Gateway\Config\Config;
+use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
+use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class BillingAddressDataBuilder
+ * Class BillingAddressDataBuilder.
  */
 class AddressDataRequest implements BuilderInterface
 {
@@ -22,13 +22,13 @@ class AddressDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * BillingAddress block name
+     * BillingAddress block name.
      */
     private const BILLING_ADDRESS = 'billingAddresses';
 
     /**
-    * BillingAddress block name
-    */
+     * BillingAddress block name.
+     */
     private const SHIPPING_ADDRESS = 'shippingAddress';
 
     /**
@@ -54,7 +54,7 @@ class AddressDataRequest implements BuilderInterface
      * Required.
      */
     private const STREET_COMPLEMENT = 'complement';
-    
+
     /**
      * The postal code. Postal code must be a string of 5 or 9 alphanumeric digits,
      * optionally separated by a dash or a space. Spaces, hyphens,
@@ -63,11 +63,9 @@ class AddressDataRequest implements BuilderInterface
     private const POSTAL_CODE = 'zipCode';
 
     /**
-     * The ISO 3166-1 alpha-3
-     *
+     * The ISO 3166-1 alpha-3.
      */
     private const COUNTRY_CODE = 'country';
-
 
     /**
      * The locality/city. 255 character maximum.
@@ -75,13 +73,13 @@ class AddressDataRequest implements BuilderInterface
     private const LOCALITY = 'city';
 
     /**
-     * The state or province. The region must be a 2-letter abbreviation;
+     * The state or province. The region must be a 2-letter abbreviation;.
      */
     private const STATE = 'state';
 
     /**
-    * @var OrderAdapterFactory
-    */
+     * @var OrderAdapterFactory
+     */
     private $orderAdapterFactory;
 
     /**
@@ -90,9 +88,9 @@ class AddressDataRequest implements BuilderInterface
     private $config;
 
     /**
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
-     * @param Config $config
+     * @param Config              $config
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -105,16 +103,18 @@ class AddressDataRequest implements BuilderInterface
     }
 
     /**
-     * Value For Field Address
+     * Value For Field Address.
+     *
      * @param $adress
      * @param $orderAdapter
      * @param $field
+     *
      * @return string value
      */
     public function getValueForAddress($adress, $orderAdapter, $field)
     {
         $value = $this->config->getAddtionalValue('attributes', $field);
-        
+
         if ($value == 0) {
             return $adress->getStreetLine1();
         } elseif ($value == 1) {
@@ -127,16 +127,17 @@ class AddressDataRequest implements BuilderInterface
             return $adress->getStreetLine1();
         }
     }
+
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
         $paymentDO = $this->subjectReader->readPayment($buildSubject);
         $payment = $paymentDO->getPayment();
-        
+
         $result = [];
-        
+
         $orderAdapter = $this->orderAdapterFactory->create(
             ['order' => $payment->getOrder()]
         );
@@ -144,30 +145,31 @@ class AddressDataRequest implements BuilderInterface
         $billingAddress = $orderAdapter->getBillingAddress();
         if ($billingAddress) {
             $result[CustomerDataRequest::CUSTOMER][self::BILLING_ADDRESS][] = [
-                self::POSTAL_CODE => $billingAddress->getPostcode(),
-                self::STREET => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET),
-                self::STREET_NUMBER => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET_NUMBER),
-                self::STREET_DISTRICT => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET_DISTRICT),
+                self::POSTAL_CODE       => $billingAddress->getPostcode(),
+                self::STREET            => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET),
+                self::STREET_NUMBER     => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET_NUMBER),
+                self::STREET_DISTRICT   => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET_DISTRICT),
                 self::STREET_COMPLEMENT => $this->getValueForAddress($billingAddress, $orderAdapter, self::STREET_COMPLEMENT),
-                self::LOCALITY => $billingAddress->getCity(),
-                self::STATE => $billingAddress->getRegionCode(),
-                self::COUNTRY_CODE => 'BRA'
+                self::LOCALITY          => $billingAddress->getCity(),
+                self::STATE             => $billingAddress->getRegionCode(),
+                self::COUNTRY_CODE      => 'BRA',
             ];
         }
 
         $shippingAddress = $orderAdapter->getShippingAddress();
         if ($shippingAddress) {
             $result[CustomerDataRequest::CUSTOMER][self::SHIPPING_ADDRESS] = [
-                self::POSTAL_CODE => $shippingAddress->getPostcode(),
-                self::STREET => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET),
-                self::STREET_NUMBER => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET_NUMBER),
-                self::STREET_DISTRICT => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET_DISTRICT),
+                self::POSTAL_CODE       => $shippingAddress->getPostcode(),
+                self::STREET            => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET),
+                self::STREET_NUMBER     => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET_NUMBER),
+                self::STREET_DISTRICT   => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET_DISTRICT),
                 self::STREET_COMPLEMENT => $this->getValueForAddress($shippingAddress, $orderAdapter, self::STREET_COMPLEMENT),
-                self::LOCALITY => $shippingAddress->getCity(),
-                self::STATE => $shippingAddress->getRegionCode(),
-                self::COUNTRY_CODE => 'BRA'
+                self::LOCALITY          => $shippingAddress->getCity(),
+                self::STATE             => $shippingAddress->getRegionCode(),
+                self::COUNTRY_CODE      => 'BRA',
             ];
         }
+
         return $result;
     }
 }

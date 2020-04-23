@@ -3,6 +3,7 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Validator;
 
 use Fluxx\Magento2\Gateway\SubjectReader;
@@ -11,12 +12,12 @@ use Magento\Payment\Gateway\Validator\ResultInterface;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;
 
 /**
- * Class GeneralResponseValidator
+ * Class GeneralResponseValidator.
  */
 class GeneralResponseValidator extends AbstractValidator
 {
     /**
-     * The result code
+     * The result code.
      */
     private const RESULT_CODE_SUCCESS = '1';
 
@@ -32,7 +33,7 @@ class GeneralResponseValidator extends AbstractValidator
 
     /**
      * @param ResultInterfaceFactory $resultFactory
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader          $subjectReader
      */
     public function __construct(
         ResultInterfaceFactory $resultFactory,
@@ -44,7 +45,7 @@ class GeneralResponseValidator extends AbstractValidator
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validate(array $validationSubject): ResultInterface
     {

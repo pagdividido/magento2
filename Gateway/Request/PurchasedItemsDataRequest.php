@@ -3,14 +3,15 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
 use Fluxx\Magento2\Gateway\Config\Config;
+use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class PurchasedItemsDataRequest
+ * Class PurchasedItemsDataRequest.
  */
 class PurchasedItemsDataRequest implements BuilderInterface
 {
@@ -20,7 +21,7 @@ class PurchasedItemsDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * BillingAddress block name
+     * BillingAddress block name.
      */
     private const PURCHASED_ITEMS = 'items';
 
@@ -52,10 +53,10 @@ class PurchasedItemsDataRequest implements BuilderInterface
      * @var Config
      */
     private $config;
-    
+
     /**
      * @param SubjectReader $subjectReader
-     * @param Config $config
+     * @param Config        $config
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -66,7 +67,7 @@ class PurchasedItemsDataRequest implements BuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
@@ -86,14 +87,15 @@ class PurchasedItemsDataRequest implements BuilderInterface
                 }
                 if ($item->getPrice() > 0) {
                     $result[self::PURCHASED_ITEMS][] = [
-                        self::PURCHASED_ITEM_PRODUCT => $item->getName(),
+                        self::PURCHASED_ITEM_PRODUCT  => $item->getName(),
                         self::PURCHASED_ITEM_QUANTITY => $item->getQtyOrdered(),
-                        self::PURCHASED_ITEM_DETAIL => $item->getSku(),
-                        self::PURCHASED_ITEM_PRICE => $this->config->formatPrice($item->getPrice())
+                        self::PURCHASED_ITEM_DETAIL   => $item->getSku(),
+                        self::PURCHASED_ITEM_PRICE    => $this->config->formatPrice($item->getPrice()),
                     ];
                 }
             }
         }
+
         return $result;
     }
 }

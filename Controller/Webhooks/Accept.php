@@ -3,21 +3,24 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Controller\Webhooks;
 
-use Psr\Log\LoggerInterface;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Framework\App\CsrfAwareActionInterface;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
+use Magento\Framework\App\RequestInterface;
+use Magento\Sales\Api\Data\OrderInterfaceFactory;
+use Psr\Log\LoggerInterface;
 
 class Accept extends Action implements CsrfAwareActionInterface
 {
     /**
-     * createCsrfValidationException
-     * @param  RequestInterface $request
+     * createCsrfValidationException.
+     *
+     * @param RequestInterface $request
+     *
      * @return null
      */
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
@@ -26,8 +29,10 @@ class Accept extends Action implements CsrfAwareActionInterface
     }
 
     /**
-     * validateForCsrf
-     * @param  RequestInterface $request
+     * validateForCsrf.
+     *
+     * @param RequestInterface $request
+     *
      * @return bool true
      */
     public function validateForCsrf(RequestInterface $request): ?bool
@@ -49,12 +54,11 @@ class Accept extends Action implements CsrfAwareActionInterface
      * @var resultJsonFactory
      */
     protected $resultJsonFactory;
-    
+
     /**
-     * 
-     * @param Context $context
-     * @param LoggerInterface $logger
-     * @param OrderInterfaceFactory $orderFactory
+     * @param Context                                          $context
+     * @param LoggerInterface                                  $logger
+     * @param OrderInterfaceFactory                            $orderFactory
      * @param \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
      */
     public function __construct(
@@ -68,10 +72,11 @@ class Accept extends Action implements CsrfAwareActionInterface
         $this->orderFactory = $orderFactory;
         $this->resultJsonFactory = $resultJsonFactory;
     }
-    
+
     /**
-     * Command Accept
-     * @return json 
+     * Command Accept.
+     *
+     * @return json
      */
     public function execute()
     {
@@ -83,9 +88,9 @@ class Accept extends Action implements CsrfAwareActionInterface
         $gatewayDataOfferId = $originalNotification['offerUUID'];
         $order = $this->orderFactory->create()->loadByIncrementId($gatewayDataOrderId);
         $storeDataOfferId = $order->getExtOrderId();
-        
-        if($storeDataOfferId == $gatewayDataOfferId){
-            $this->logger->debug("Accept ".$storeDataOfferId);
+
+        if ($storeDataOfferId == $gatewayDataOfferId) {
+            $this->logger->debug('Accept '.$storeDataOfferId);
             $this->logger->debug($response);
 
             $payment = $order->getPayment();
@@ -101,7 +106,8 @@ class Accept extends Action implements CsrfAwareActionInterface
             } else {
                 return $resultJson->setData(['success' => 0, 'error' => 'The transaction could not be accept']);
             }
+
             return $resultJson->setData(['success' => 1, 'status' => $order->getStatus(), 'state' => $order->getState()]);
-        };
+        }
     }
 }

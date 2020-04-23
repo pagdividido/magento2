@@ -3,15 +3,15 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Payment\Observer\AbstractDataAssignObserver;
 use Magento\Quote\Api\Data\PaymentInterface;
-use Fluxx\Magento2\Gateway\Request\DeviceRequest;
 
 /**
- * Class DataAssignObserver
+ * Class DataAssignObserver.
  */
 class DataAssignObserver extends AbstractDataAssignObserver
 {
@@ -23,17 +23,17 @@ class DataAssignObserver extends AbstractDataAssignObserver
     /**
      * @const rg
      */
-    const PAYER_RG  = 'rg';
+    const PAYER_RG = 'rg';
 
     /**
      * @const birth_city
      */
-    const PAYER_BIRTH_CITY  = 'birth_city';
+    const PAYER_BIRTH_CITY = 'birth_city';
 
     /**
      * @const birth_region
      */
-    const PAYER_BIRTH_REGION  = 'birth_region';
+    const PAYER_BIRTH_REGION = 'birth_region';
 
     /**
      * @const gender
@@ -53,8 +53,8 @@ class DataAssignObserver extends AbstractDataAssignObserver
     /**
      * @const financing_name
      */
-    const PAYER_OFFERS_NAME = "financing_name";
-    
+    const PAYER_OFFERS_NAME = 'financing_name';
+
     /**
      * @var array
      */
@@ -66,11 +66,12 @@ class DataAssignObserver extends AbstractDataAssignObserver
         self::PAYER_GENDER,
         self::PAYER_DOB,
         self::PAYER_OFFERS,
-        self::PAYER_OFFERS_NAME
+        self::PAYER_OFFERS_NAME,
     ];
 
     /**
      * @param Observer $observer
+     *
      * @return void
      */
     public function execute(Observer $observer)

@@ -8,14 +8,12 @@ declare(strict_types=1);
 
 namespace Fluxx\Magento2\Gateway;
 
+use Magento\Checkout\Model\Session;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Helper;
-use Magento\Vault\Api\Data\PaymentTokenInterface;
-use Magento\Checkout\Model\Session;
-use Magento\Quote\Model\Quote;
 
 /**
- * Class SubjectReader
+ * Class SubjectReader.
  */
 class SubjectReader
 {
@@ -25,7 +23,8 @@ class SubjectReader
     private $checkoutSession;
 
     /**
-     * SubjectReader constructor
+     * SubjectReader constructor.
+     *
      * @param Session $checkoutSession
      */
     public function __construct(
@@ -35,8 +34,10 @@ class SubjectReader
     }
 
     /**
-     * Reads payment from subject
+     * Reads payment from subject.
+     *
      * @param array $subject
+     *
      * @return PaymentDataObjectInterface
      */
     public function readPayment(array $subject): PaymentDataObjectInterface
@@ -45,8 +46,10 @@ class SubjectReader
     }
 
     /**
-     * Reads store's ID, otherwise returns null
+     * Reads store's ID, otherwise returns null.
+     *
      * @param array $subject
+     *
      * @return int|null
      */
     public function readStoreId(array $subject): ?int
@@ -55,7 +58,7 @@ class SubjectReader
 
         if (empty($storeId)) {
             try {
-                $storeId = (int)$this->readPayment($subject)
+                $storeId = (int) $this->readPayment($subject)
                     ->getOrder()
                     ->getStoreId();
                 // phpcs:ignore Magento2.CodeAnalysis.EmptyBlock
@@ -64,23 +67,26 @@ class SubjectReader
             }
         }
 
-        return $storeId ? (int)$storeId : null;
+        return $storeId ? (int) $storeId : null;
     }
 
     /**
-     * Reads amount from subject
+     * Reads amount from subject.
+     *
      * @param array $subject
+     *
      * @return string
      */
     public function readAmount(array $subject): string
     {
-        return (string)Helper\SubjectReader::readAmount($subject);
+        return (string) Helper\SubjectReader::readAmount($subject);
     }
 
     /**
-     * Reads response from subject
+     * Reads response from subject.
      *
      * @param array $subject
+     *
      * @return array
      */
     public function readResponse(array $subject): ?array
@@ -89,8 +95,8 @@ class SubjectReader
     }
 
     /**
-    * @return \Magento\Quote\Model\Quote
-    */
+     * @return \Magento\Quote\Model\Quote
+     */
     public function getQuote()
     {
         return $this->checkoutSession->getQuote();

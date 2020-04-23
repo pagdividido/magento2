@@ -3,13 +3,14 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 
 /**
- * Class DenyPaymentHandler
+ * Class DenyPaymentHandler.
  */
 class DenyPaymentHandler implements HandlerInterface
 {
@@ -19,9 +20,11 @@ class DenyPaymentHandler implements HandlerInterface
     const TXN_ID = 'TXN_ID';
 
     /**
-     * Deny
+     * Deny.
+     *
      * @param array $handlingSubject
      * @param array $response
+     *
      * @return deny
      */
     public function handle(array $handlingSubject, array $response)
@@ -39,12 +42,9 @@ class DenyPaymentHandler implements HandlerInterface
 
         $order = $payment->getOrder();
         /** @var $payment \Magento\Sales\Model\Order\Payment */
-
-        
         $payment->setIsTransactionApproved(false);
         $payment->setIsTransactionDenied(true);
         $payment->setIsInProcess(true);
         $payment->setIsTransactionClosed(true);
-       
     }
 }

@@ -3,13 +3,14 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 
 /**
- * Class TxnIdHandler
+ * Class TxnIdHandler.
  */
 class TxnIdHandler implements HandlerInterface
 {
@@ -19,10 +20,11 @@ class TxnIdHandler implements HandlerInterface
     const TXN_ID = 'TXN_ID';
 
     /**
-     * Handles transaction id
+     * Handles transaction id.
      *
      * @param array $handlingSubject
      * @param array $response
+     *
      * @return TxnID
      */
     public function handle(array $handlingSubject, array $response)

@@ -1,27 +1,27 @@
 <?php
+
 declare(strict_types=1);
 /**
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Http\Client;
 
-use InvalidArgumentException;
 use Fluxx\Magento2\Gateway\Config\Config;
+use InvalidArgumentException;
 use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
-use Magento\Payment\Gateway\Http\ClientException;
 use Magento\Payment\Gateway\Http\ClientInterface;
 use Magento\Payment\Gateway\Http\TransferInterface;
 use Magento\Payment\Model\Method\Logger;
 
 /**
- * Class AuthorizeClient
+ * Class AuthorizeClient.
  */
 class AuthorizeClient implements ClientInterface
 {
-       
     /**
      * @var LoggerInterface
      */
@@ -43,11 +43,10 @@ class AuthorizeClient implements ClientInterface
     private $json;
 
     /**
-     * 
-     * @param Logger $logger
+     * @param Logger            $logger
      * @param ZendClientFactory $httpClientFactory
-     * @param Config $config
-     * @param Json $json
+     * @param Config            $config
+     * @param Json              $json
      */
     public function __construct(
         Logger $logger,
@@ -62,11 +61,13 @@ class AuthorizeClient implements ClientInterface
     }
 
     /**
-     * Places request to gateway. Returns result as ENV array
+     * Places request to gateway. Returns result as ENV array.
      *
      * @param TransferInterface $transferObject
-     * @return array
+     *
      * @throws \Magento\Payment\Gateway\Http\ClientException
+     *
+     * @return array
      */
     public function placeRequest(TransferInterface $transferObject)
     {
@@ -75,6 +76,7 @@ class AuthorizeClient implements ClientInterface
         $url = $this->config->getApiUrl();
         $apiUsername = $this->config->getMerchantGatewayUsername();
         $apiKey = $this->config->getMerchantGatewayKey();
+
         try {
             $client->setUri($url.'/checkout');
             $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
@@ -84,12 +86,12 @@ class AuthorizeClient implements ClientInterface
 
             $responseBody = $client->request()->getBody();
             $data = $this->json->unserialize($responseBody);
-            if(isset($data['orderUUID'])) {
+            if (isset($data['orderUUID'])) {
                 $response = array_merge(
                     [
                         'RESULT_CODE' => 1,
-                        'TXN_ID' =>$data['orderUUID'],
-                        'EXT_ORD_ID' => $data['orderUUID']
+                        'TXN_ID'      => $data['orderUUID'],
+                        'EXT_ORD_ID'  => $data['orderUUID'],
                     ],
                     $data
                 );
@@ -103,15 +105,15 @@ class AuthorizeClient implements ClientInterface
             }
             $this->logger->debug(
                 [
-                    'request' => $this->json->serialize($transferObject->getBody()),
-                    'response' => $responseBody
+                    'request'  => $this->json->serialize($transferObject->getBody()),
+                    'response' => $responseBody,
                 ]
             );
         } catch (InvalidArgumentException $e) {
             // phpcs:ignore Magento2.Exceptions.DirectThrow
             throw new \Exception('Invalid JSON was returned by the gateway');
         }
-        
+
         return $response;
     }
 }

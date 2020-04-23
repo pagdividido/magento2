@@ -87,8 +87,7 @@ class Deny extends Action implements CsrfAwareActionInterface
         $order = $this->orderFactory->create()->loadByIncrementId($gatewayDataOrderId);
         $storeDataOfferId = $order->getExtOrderId();
         // verificação de segurança
-        // if($storeDataOfferId == $gatewayDataOfferId){
-        if ($storeDataOfferId) {
+        if($storeDataOfferId == $gatewayDataOfferId){
             $this->logger->debug("Deny ".$storeDataOfferId);
             $this->logger->debug($response);
 

@@ -84,8 +84,7 @@ class Accept extends Action implements CsrfAwareActionInterface
         $order = $this->orderFactory->create()->loadByIncrementId($gatewayDataOrderId);
         $storeDataOfferId = $order->getExtOrderId();
         
-        // if($storeDataOfferId == $gatewayDataOfferId){
-        if ($storeDataOfferId) {
+        if($storeDataOfferId == $gatewayDataOfferId){
             $this->logger->debug("Accept ".$storeDataOfferId);
             $this->logger->debug($response);
 

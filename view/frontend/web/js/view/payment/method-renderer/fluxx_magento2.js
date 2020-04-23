@@ -52,7 +52,7 @@ define(
                 $.ajax({
                     url: urlCheck,
                     dataType: 'json',
-                    timeout: 4000,
+                    timeout: 55000,
                     type : 'post',
                     data: { dob: $('#fluxx_magento2_dob').val() },
                     beforeSend : function(){

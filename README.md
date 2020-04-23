@@ -1,7 +1,7 @@
 # Fluxx Magento 2
 ![Fluxx](view/adminhtml/web/images/logo.svg)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a9ca416ca6b04eaca9b2c94cf61b5e2b)](https://app.codacy.com/manual/DevMagentoFluxx/magento2?utm_source=github.com&utm_medium=referral&utm_content=DevMagentoFluxx/magento2&utm_campaign=Badge_Grade_Dashboard) [![StyleCI](https://github.styleci.io/repos/257997111/shield?branch=master)]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c8e5a8ae6354821bf2f990a4d0ff397)](https://www.codacy.com/manual/DevMagentoFluxx/magento2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevMagentoFluxx/magento2&amp;utm_campaign=Badge_Grade) ![StyleCI](https://github.styleci.io/repos/257997111/shield?branch=master)
 
 ## Extension features
 

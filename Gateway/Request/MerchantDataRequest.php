@@ -3,16 +3,17 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
+use Fluxx\Magento2\Gateway\Config\Config;
+use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
+use Fluxx\Magento2\Gateway\SubjectReader;
 use Magento\Framework\UrlInterface;
 use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
-use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
-use Fluxx\Magento2\Gateway\Config\Config;
 
 /**
- * Class MerchantDataRequest
+ * Class MerchantDataRequest.
  */
 class MerchantDataRequest implements BuilderInterface
 {
@@ -22,7 +23,7 @@ class MerchantDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * Merchant block name
+     * Merchant block name.
      */
     public const MERCHANT = 'merchant';
 
@@ -31,7 +32,7 @@ class MerchantDataRequest implements BuilderInterface
      * Required.
      */
     public const CONFIRMATION_URL = 'confirmationUrl';
-    
+
     /**
      * The Canel Url
      * Required.
@@ -61,15 +62,15 @@ class MerchantDataRequest implements BuilderInterface
     private $config;
 
     /**
-    * @var UrlInterface
-    */
+     * @var UrlInterface
+     */
     private $urlBuilder;
 
     /**
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
-     * @param UrlInterface $urlBuilder
-     * @param Config $config
+     * @param UrlInterface        $urlBuilder
+     * @param Config              $config
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -84,13 +85,13 @@ class MerchantDataRequest implements BuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
         $paymentDO = $this->subjectReader->readPayment($buildSubject);
         $payment = $paymentDO->getPayment();
-        
+
         $result = [];
         $typeDocument = 'CPF';
 
@@ -99,11 +100,12 @@ class MerchantDataRequest implements BuilderInterface
         );
 
         $result[self::MERCHANT] = [
-            self::CONFIRMATION_URL => $this->urlBuilder->getUrl('fluxx/webhooks/accept', ['_secure' => true]),
-            self::CANCEL_URL => $this->urlBuilder->getUrl('fluxx/webhooks/deny', ['_secure' => true]),
+            self::CONFIRMATION_URL         => $this->urlBuilder->getUrl('fluxx/webhooks/accept', ['_secure' => true]),
+            self::CANCEL_URL               => $this->urlBuilder->getUrl('fluxx/webhooks/deny', ['_secure' => true]),
             self::USER_CONFIRMATION_ACTION => 'POST',
-            self::STORE_NAME => 'Loja'
+            self::STORE_NAME               => 'Loja',
         ];
+
         return $result;
     }
 }

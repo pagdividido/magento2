@@ -3,15 +3,16 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
-use Magento\Framework\HTTP\Header as HeaderClient;
-use Magento\Payment\Gateway\Request\BuilderInterface;
 use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Framework\HTTP\Header as HeaderClient;
+use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class DeviceDataRequest
+ * Class DeviceDataRequest.
  */
 class DeviceDataRequest implements BuilderInterface
 {
@@ -21,18 +22,18 @@ class DeviceDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * Device data
+     * Device data.
      */
     private const DEVICE_DATA = 'device';
 
     /**
-    * RemoteIP data
-    */
+     * RemoteIP data.
+     */
     private const REMOTE_IP = 'ip';
 
     /**
-    * RemoteUserAgent data
-    */
+     * RemoteUserAgent data.
+     */
     private const REMOTE_USER_AGENT = 'userAgent';
 
     /**
@@ -47,7 +48,7 @@ class DeviceDataRequest implements BuilderInterface
 
     /**
      * @param RemoteAddress $remoteAddress
-     * @param HeaderClient $headerClient
+     * @param HeaderClient  $headerClient
      * @param SubjectReader $subjectReader
      */
     public function __construct(
@@ -61,7 +62,7 @@ class DeviceDataRequest implements BuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
@@ -69,16 +70,17 @@ class DeviceDataRequest implements BuilderInterface
 
         $result = [];
         $result[self::DEVICE_DATA] = [
-            self::REMOTE_IP => $this->remoteAddress->getRemoteAddress(),
-            self::REMOTE_USER_AGENT => $this->headerClient->getHttpUserAgent()
+            self::REMOTE_IP         => $this->remoteAddress->getRemoteAddress(),
+            self::REMOTE_USER_AGENT => $this->headerClient->getHttpUserAgent(),
         ];
 
         $paymentInfo = $paymentDO->getPayment();
-       
+
         $paymentInfo->setAdditionalInformation(
             self::DEVICE_DATA,
             $result[self::DEVICE_DATA]
         );
+
         return $result;
     }
 }

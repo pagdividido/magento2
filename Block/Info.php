@@ -3,19 +3,22 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;
 
 /**
- * Class Info
+ * Class Info.
  */
 class Info extends ConfigurableInfo
 {
     /**
-     * Returns label
+     * Returns label.
+     *
      * @param string $field
+     *
      * @return Phrase
      */
     protected function getLabel($field)
@@ -24,9 +27,11 @@ class Info extends ConfigurableInfo
     }
 
     /**
-     * Returns value view
+     * Returns value view.
+     *
      * @param string $field
      * @param string $value
+     *
      * @return string | Phrase
      */
     protected function getValueView($field, $value)
@@ -34,6 +39,7 @@ class Info extends ConfigurableInfo
         if (is_array($value)) {
             return implode('; ', $value);
         }
+
         return parent::getValueView($field, $value);
     }
 }

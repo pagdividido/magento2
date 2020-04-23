@@ -3,13 +3,14 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 
 /**
- * Class AcceptPaymentHandler
+ * Class AcceptPaymentHandler.
  */
 class AcceptPaymentHandler implements HandlerInterface
 {
@@ -19,9 +20,11 @@ class AcceptPaymentHandler implements HandlerInterface
     const TXN_ID = 'TXN_ID';
 
     /**
-     * Accpet
+     * Accpet.
+     *
      * @param array $handlingSubject
      * @param array $response
+     *
      * @return accept
      */
     public function handle(array $handlingSubject, array $response)
@@ -39,7 +42,6 @@ class AcceptPaymentHandler implements HandlerInterface
 
         $order = $payment->getOrder();
         /** @var $payment \Magento\Sales\Model\Order\Payment */
-
         $amount = $order->getBaseGrandTotal();
         $baseAmount = $order->getGrandTotal();
 

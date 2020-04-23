@@ -3,15 +3,15 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Data\Order;
 
-use Fluxx\Magento2\Gateway\Data\Order\AddressAdapterFactory;
 use Magento\Payment\Gateway\Data\AddressAdapterInterface;
 use Magento\Payment\Gateway\Data\OrderAdapterInterface;
 use Magento\Sales\Model\Order;
 
 /**
- * Class OrderAdapter
+ * Class OrderAdapter.
  */
 class OrderAdapter implements OrderAdapterInterface
 {
@@ -38,7 +38,7 @@ class OrderAdapter implements OrderAdapterInterface
     /**
      * OrderAdapter constructor.
      *
-     * @param Order $order
+     * @param Order                 $order
      * @param AddressAdapterFactory $addressAdapterFactory
      */
     public function __construct(
@@ -50,7 +50,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns currency code
+     * Returns currency code.
+     *
      * @return string
      */
     public function getCurrencyCode()
@@ -59,7 +60,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order increment id
+     * Returns order increment id.
+     *
      * @return string
      */
     public function getOrderIncrementId()
@@ -68,7 +70,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns customer ID
+     * Returns customer ID.
+     *
      * @return int|null
      */
     public function getCustomerId()
@@ -77,7 +80,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns billing address
+     * Returns billing address.
+     *
      * @return AddressAdapterInterface|null
      */
     public function getBillingAddress()
@@ -92,7 +96,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns shipping address
+     * Returns shipping address.
+     *
      * @return AddressAdapterInterface|null
      */
     public function getShippingAddress()
@@ -107,7 +112,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order store id
+     * Returns order store id.
+     *
      * @return int
      */
     public function getStoreId()
@@ -116,7 +122,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order id
+     * Returns order id.
+     *
      * @return int
      */
     public function getId()
@@ -125,7 +132,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order grand total amount
+     * Returns order grand total amount.
+     *
      * @return float|null
      */
     public function getGrandTotalAmount()
@@ -134,7 +142,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns list of line items in the cart
+     * Returns list of line items in the cart.
+     *
      * @return \Magento\Sales\Api\Data\OrderItemInterface[]
      */
     public function getItems()
@@ -143,7 +152,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Gets the remote IP address for the order
+     * Gets the remote IP address for the order.
+     *
      * @return string|null Remote IP address.
      */
     public function getRemoteIp()
@@ -152,7 +162,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Gets the Dob for the customer
+     * Gets the Dob for the customer.
+     *
      * @return date|null Dob.
      */
     public function getCustomerDob()
@@ -161,7 +172,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Gets the Tax/Vat for the customer
+     * Gets the Tax/Vat for the customer.
+     *
      * @return string|null Tax/Vat.
      */
     public function getCustomerTaxvat()
@@ -170,7 +182,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order shipping total amount
+     * Returns order shipping total amount.
+     *
      * @return float|null
      */
     public function getShippingAmount()
@@ -179,7 +192,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order discount total amount
+     * Returns order discount total amount.
+     *
      * @return float|null
      */
     public function getDiscountAmount()
@@ -188,7 +202,8 @@ class OrderAdapter implements OrderAdapterInterface
     }
 
     /**
-     * Returns order tax total amount
+     * Returns order tax total amount.
+     *
      * @return float|null
      */
     public function getTaxAmount()

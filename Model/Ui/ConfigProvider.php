@@ -3,21 +3,16 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
-
-use Fluxx\Magento2\Gateway\Config\Config;
-use Fluxx\Magento2\Gateway\Http\Client\CheckClient;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Asset\Repository;
-use Magento\Framework\App\RequestInterface;
-use Magento\Checkout\Model\Session as CheckoutSession;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest as FluxxCustomerDataRequest;
-use Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest as FluxxTaxDocumentDataRequest;
 
 /**
- * Class ConfigProvider
+ * Class ConfigProvider.
  */
 final class ConfigProvider implements ConfigProviderInterface
 {
@@ -39,10 +34,10 @@ final class ConfigProvider implements ConfigProviderInterface
     protected $request;
 
     /**
-    * @param Repository $assetRepo
-    * @param RequestInterface $request
-    * @param UrlInterface $urlBuilder
-    */
+     * @param Repository       $assetRepo
+     * @param RequestInterface $request
+     * @param UrlInterface     $urlBuilder
+     */
     public function __construct(
         Repository $assetRepo,
         RequestInterface $request,
@@ -54,7 +49,8 @@ final class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * Retrieve assoc array of checkout configuration
+     * Retrieve assoc array of checkout configuration.
+     *
      * @return array
      */
     public function getConfig()
@@ -89,18 +85,19 @@ final class ConfigProvider implements ConfigProviderInterface
                         'SC' => __('Santa Catarina'),
                         'SP' => __('São Paulo'),
                         'SE' => __('Sergipe'),
-                        'TO' => __('Tocantins')
+                        'TO' => __('Tocantins'),
                     ],
                     'checkOffers' => ['availability' => true],
-                    'logo' => $this->getLoggImageUrl()
-                   
-                ]
-            ]
+                    'logo'        => $this->getLoggImageUrl(),
+
+                ],
+            ],
         ];
     }
 
     /**
-     * Retrieve Logo image url
+     * Retrieve Logo image url.
+     *
      * @return string
      */
     public function getLoggImageUrl()
@@ -109,31 +106,38 @@ final class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * Retrieve url of a view file
+     * Retrieve url of a view file.
+     *
      * @param string $fileId
-     * @param array $params
+     * @param array  $params
+     *
      * @return string
      */
     public function getViewFileUrl($fileId, array $params = [])
     {
         try {
             $params = array_merge(['_secure' => $this->request->isSecure()], $params);
+
             return $this->assetRepo->getUrlWithParams($fileId, $params);
         } catch (LocalizedException $e) {
             $this->logger->critical($e);
+
             return $this->urlBuilder->getUrl('', ['_direct' => 'core/index/notFound']);
         }
     }
 
     /**
-     * Create a file asset that's subject of fallback system
+     * Create a file asset that's subject of fallback system.
+     *
      * @param string $fileId
-     * @param array $params
+     * @param array  $params
+     *
      * @return \Magento\Framework\View\Asset\File
      */
     public function createAsset($fileId, array $params = [])
     {
         $params = array_merge(['_secure' => $this->request->isSecure()], $params);
+
         return $this->assetRepo->createAsset($fileId, $params);
     }
 }

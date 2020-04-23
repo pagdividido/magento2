@@ -14,13 +14,15 @@ use Magento2\Result\Successful;
 use Magento2\Transaction;
 
 /**
- * Class ErrorCodeProvider
+ * Class ErrorCodeProvider.
  */
 class ErrorCodeProvider
 {
     /**
-     * Error list
+     * Error list.
+     *
      * @param Successful|Error $response
+     *
      * @return array
      */
     public function getErrorCodes($response): array

@@ -3,16 +3,16 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
-use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest;
 use Fluxx\Magento2\Gateway\Config\Config;
+use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
+use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class TaxDocumentDataRequest
+ * Class TaxDocumentDataRequest.
  */
 class TaxDocumentDataRequest implements BuilderInterface
 {
@@ -22,7 +22,7 @@ class TaxDocumentDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * BillingAddress block name
+     * BillingAddress block name.
      */
     public const TAX_DOCUMENT = 'taxDocument';
 
@@ -49,9 +49,9 @@ class TaxDocumentDataRequest implements BuilderInterface
     private $config;
 
     /**
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
-     * @param Config $config
+     * @param Config              $config
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -64,8 +64,10 @@ class TaxDocumentDataRequest implements BuilderInterface
     }
 
     /**
-     * ValueForTaxDocument
+     * ValueForTaxDocument.
+     *
      * @param $orderAdapter
+     *
      * @return value
      */
     public function getValueForTaxDocument($orderAdapter)
@@ -82,40 +84,40 @@ class TaxDocumentDataRequest implements BuilderInterface
         } else {
             $attributeTaxDocumentAddress = $this->config->getAddtionalValue('attributes', 'cpf_for_address');
             if ($attributeTaxDocumentAddress == 'vat_id') {
-                $taxDocument =  $orderAdapter->getBillingAddress()->getVatId();
+                $taxDocument = $orderAdapter->getBillingAddress()->getVatId();
             } else {
-                $taxDocument =  $orderAdapter->getBillingAddress()->getData($attributeTaxDocumentAddress);
+                $taxDocument = $orderAdapter->getBillingAddress()->getData($attributeTaxDocumentAddress);
             }
         }
 
-        return preg_replace("/[^0-9]/", "", $taxDocument);
+        return preg_replace('/[^0-9]/', '', $taxDocument);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
         $paymentDO = $this->subjectReader->readPayment($buildSubject);
         $payment = $paymentDO->getPayment();
-        
+
         $result = [];
         $typeDocument = 'CPF';
 
         $orderAdapter = $this->orderAdapterFactory->create(
             ['order' => $payment->getOrder()]
         );
-        
+
         $taxDocument = $this->getValueForTaxDocument($orderAdapter);
-        
+
         if (strlen($taxDocument) === 14) {
             $typeDocument = 'CNPJ';
         }
 
         if ($taxDocument) {
             $result[CustomerDataRequest::CUSTOMER][self::TAX_DOCUMENT][0] = [
-                self::TAX_DOCUMENT_TYPE => $typeDocument,
-                self::TAX_DOCUMENT_NUMBER => $taxDocument
+                self::TAX_DOCUMENT_TYPE   => $typeDocument,
+                self::TAX_DOCUMENT_NUMBER => $taxDocument,
             ];
         }
 

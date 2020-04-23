@@ -3,20 +3,21 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Payment\Gateway\ConfigInterface;
-use Magento\Store\Model\ScopeInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
- * Class Config
+ * Class Config.
  */
 class Config extends \Magento\Payment\Gateway\Config\Config
 {
     /**
-     * Round up
+     * Round up.
+     *
      * @const int
      */
     const ROUND_UP = 100;
@@ -48,7 +49,6 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      * @const string
      */
     const CLIENT_VERSION = '1.0.0';
-
 
     /**
      * Config Pattern for Atribute.
@@ -84,21 +84,24 @@ class Config extends \Magento\Payment\Gateway\Config\Config
         $this->scopeConfig = $scopeConfig;
         $this->encryptor = $encryptor;
     }
-    
+
     /**
-     * Formant Price
+     * Formant Price.
+     *
      * @param int $amount
-     * @return  int
+     *
+     * @return int
      */
     public static function formatPrice($amount)
     {
         return $amount * self::ROUND_UP;
     }
-    
+
     /**
-     * Gets the API endpoint URL
+     * Gets the API endpoint URL.
      *
      * @param int|null $storeId
+     *
      * @return string
      */
     public function getApiUrl($storeId = null): string
@@ -111,9 +114,10 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     }
 
     /**
-     * Gets the Merchant Gateway Key
+     * Gets the Merchant Gateway Key.
      *
      * @param int|null $storeId
+     *
      * @return string
      */
     public function getMerchantGatewayKey($storeId = null): string
@@ -127,9 +131,10 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     }
 
     /**
-     * Gets the Merchant Gateway Username
+     * Gets the Merchant Gateway Username.
      *
      * @param int|null $storeId
+     *
      * @return string
      */
     public function getMerchantGatewayUsername($storeId = null): string
@@ -143,14 +148,14 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     }
 
     /**
-     * Gets the AddtionalValues
+     * Gets the AddtionalValues.
      *
-     * @param string $typePattern
-     * @param string $field
+     * @param string   $typePattern
+     * @param string   $field
      * @param int|null $storeId
+     *
      * @return string
      */
-    
     public function getAddtionalValue($typePattern, $field, $storeId = null): string
     {
         $pathPattern = 'payment/%s/%s';

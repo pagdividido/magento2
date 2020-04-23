@@ -3,14 +3,15 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
-use Magento\Payment\Gateway\Request\BuilderInterface;
-use Fluxx\Magento2\Gateway\SubjectReader;
 use Fluxx\Magento2\Gateway\Data\Order\OrderAdapterFactory;
+use Fluxx\Magento2\Gateway\SubjectReader;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 
 /**
- * Class BillingAddressDataBuilder
+ * Class BillingAddressDataBuilder.
  */
 class BillingAddressDataRequest implements BuilderInterface
 {
@@ -20,7 +21,7 @@ class BillingAddressDataRequest implements BuilderInterface
     private $subjectReader;
 
     /**
-     * BillingAddress block name
+     * BillingAddress block name.
      */
     private const BILLING_ADDRESS = 'billingAddress';
 
@@ -47,7 +48,7 @@ class BillingAddressDataRequest implements BuilderInterface
      * Required.
      */
     private const STREET_COMPLEMENT = 'complement';
-    
+
     /**
      * The postal code. Postal code must be a string of 5 or 9 alphanumeric digits,
      * optionally separated by a dash or a space. Spaces, hyphens,
@@ -56,11 +57,9 @@ class BillingAddressDataRequest implements BuilderInterface
     private const POSTAL_CODE = 'zipCode';
 
     /**
-     * The ISO 3166-1 alpha-3
-     *
+     * The ISO 3166-1 alpha-3.
      */
     private const COUNTRY_CODE = 'country';
-
 
     /**
      * The locality/city. 255 character maximum.
@@ -68,17 +67,17 @@ class BillingAddressDataRequest implements BuilderInterface
     private const LOCALITY = 'city';
 
     /**
-     * The state or province. The region must be a 2-letter abbreviation;
+     * The state or province. The region must be a 2-letter abbreviation;.
      */
     private const STATE = 'state';
 
     /**
-    * @var OrderAdapterFactory
-    */
+     * @var OrderAdapterFactory
+     */
     private $orderAdapterFactory;
 
     /**
-     * @param SubjectReader $subjectReader
+     * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
      */
     public function __construct(
@@ -90,7 +89,7 @@ class BillingAddressDataRequest implements BuilderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(array $buildSubject)
     {
@@ -102,17 +101,17 @@ class BillingAddressDataRequest implements BuilderInterface
         $orderAdapter = $this->orderAdapterFactory->create(
             ['order' => $payment->getOrder()]
         );
-        
+
         $billingAddress = $orderAdapter->getBillingAddress();
         if ($billingAddress) {
             $result[self::BILLING_ADDRESS] = [
-                self::POSTAL_CODE => $billingAddress->getPostcode(),
-                self::STREET => $billingAddress->getStreetLine1(),
-                self::STREET_NUMBER => $billingAddress->getStreetLine2(),
-                self::STREET_DISTRICT => $billingAddress->getStreetLine3(),
+                self::POSTAL_CODE       => $billingAddress->getPostcode(),
+                self::STREET            => $billingAddress->getStreetLine1(),
+                self::STREET_NUMBER     => $billingAddress->getStreetLine2(),
+                self::STREET_DISTRICT   => $billingAddress->getStreetLine3(),
                 self::STREET_COMPLEMENT => $billingAddress->getStreetLine4(),
-                self::STATE => $billingAddress->getRegionCode(),
-                self::COUNTRY_CODE => $billingAddress->getCountryId()
+                self::STATE             => $billingAddress->getRegionCode(),
+                self::COUNTRY_CODE      => $billingAddress->getCountryId(),
             ];
         }
 

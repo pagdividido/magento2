@@ -3,15 +3,16 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Request;
 
 use Magento\Payment\Gateway\ConfigInterface;
-use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
+use Magento\Payment\Gateway\Request\BuilderInterface;
 use Magento\Sales\Api\Data\OrderPaymentInterface;
 
 /**
- * Class TaxDocumentDataRequest
+ * Class TaxDocumentDataRequest.
  */
 class VoidRequest implements BuilderInterface
 {
@@ -30,9 +31,10 @@ class VoidRequest implements BuilderInterface
     }
 
     /**
-     * Builds ENV request
+     * Builds ENV request.
      *
      * @param array $buildSubject
+     *
      * @return array
      */
     public function build(array $buildSubject)
@@ -55,7 +57,7 @@ class VoidRequest implements BuilderInterface
 
         return [
             'TXN_TYPE' => 'V',
-            'TXN_ID' => $payment->getLastTransId(),
+            'TXN_ID'   => $payment->getLastTransId(),
         ];
     }
 }

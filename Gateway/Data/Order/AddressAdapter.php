@@ -3,13 +3,14 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Gateway\Data\Order;
 
 use Magento\Payment\Gateway\Data\AddressAdapterInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;
 
 /**
- * Class AddressAdapter
+ * Class AddressAdapter.
  */
 class AddressAdapter implements AddressAdapterInterface
 {
@@ -27,7 +28,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get region name
+     * Get region name.
+     *
      * @return string
      */
     public function getRegionCode()
@@ -36,7 +38,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get country id
+     * Get country id.
+     *
      * @return string
      */
     public function getCountryId()
@@ -45,47 +48,56 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get street line 1
+     * Get street line 1.
+     *
      * @return string
      */
     public function getStreetLine1()
     {
         $street = $this->address->getStreet();
-        return isset($street[0]) ? $street[0]: '';
+
+        return isset($street[0]) ? $street[0] : '';
     }
 
     /**
-     * Get street line 2
+     * Get street line 2.
+     *
      * @return string
      */
     public function getStreetLine2()
     {
         $street = $this->address->getStreet();
-        return isset($street[1]) ? $street[1]: '';
+
+        return isset($street[1]) ? $street[1] : '';
     }
 
     /**
-     * Get street line 3
+     * Get street line 3.
+     *
      * @return string
      */
     public function getStreetLine3()
     {
         $street = $this->address->getStreet();
-        return isset($street[2]) ? $street[2]: '';
+
+        return isset($street[2]) ? $street[2] : '';
     }
 
     /**
-     * Get street line 4
+     * Get street line 4.
+     *
      * @return string
      */
     public function getStreetLine4()
     {
         $street = $this->address->getStreet();
-        return isset($street[4]) ? $street[4]: '';
+
+        return isset($street[4]) ? $street[4] : '';
     }
 
     /**
-     * Get telephone number
+     * Get telephone number.
+     *
      * @return string
      */
     public function getTelephone()
@@ -94,7 +106,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get postcode
+     * Get postcode.
+     *
      * @return string
      */
     public function getPostcode()
@@ -103,7 +116,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get city name
+     * Get city name.
+     *
      * @return string
      */
     public function getCity()
@@ -112,7 +126,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get first name
+     * Get first name.
+     *
      * @return string
      */
     public function getFirstname()
@@ -121,7 +136,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get last name
+     * Get last name.
+     *
      * @return string
      */
     public function getLastname()
@@ -130,7 +146,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get middle name
+     * Get middle name.
+     *
      * @return string|null
      */
     public function getMiddlename()
@@ -139,7 +156,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get customer id
+     * Get customer id.
+     *
      * @return int|null
      */
     public function getCustomerId()
@@ -148,7 +166,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get billing/shipping email
+     * Get billing/shipping email.
+     *
      * @return string
      */
     public function getEmail()
@@ -157,7 +176,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Returns name prefix
+     * Returns name prefix.
+     *
      * @return string
      */
     public function getPrefix()
@@ -166,7 +186,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Returns name suffix
+     * Returns name suffix.
+     *
      * @return string
      */
     public function getSuffix()
@@ -175,7 +196,8 @@ class AddressAdapter implements AddressAdapterInterface
     }
 
     /**
-     * Get company
+     * Get company.
+     *
      * @return string
      */
     public function getCompany()
@@ -183,9 +205,9 @@ class AddressAdapter implements AddressAdapterInterface
         return $this->address->getCompany();
     }
 
-
     /**
-     * Get Vat Id
+     * Get Vat Id.
+     *
      * @return string
      */
     public function getVatId()

@@ -3,21 +3,22 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
+
 namespace Fluxx\Magento2\Block;
 
-use Magento\Backend\Model\Session\Quote;
 use Fluxx\Magento2\Gateway\Config\Config as GatewayConfig;
+use Fluxx\Magento2\Gateway\Http\Client\CheckClient;
+use Fluxx\Magento2\Gateway\Request\CustomerDataRequest as FluxxCustomerDataRequest;
+use Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest as FluxxTaxDocumentDataRequest;
 use Fluxx\Magento2\Model\Ui\ConfigProvider;
+use Magento\Backend\Model\Session\Quote;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Payment\Block\Form\Cc;
 use Magento\Payment\Helper\Data;
 use Magento\Payment\Model\Config;
-use Fluxx\Magento2\Gateway\Http\Client\CheckClient;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest as FluxxCustomerDataRequest;
-use Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest as FluxxTaxDocumentDataRequest;
 
 /**
- * Class Form
+ * Class Form.
  */
 class Form extends Cc
 {
@@ -52,17 +53,16 @@ class Form extends Cc
     private $fluxxTaxDocumentDataRequest;
 
     /**
-     * 
-     * @param Context                     $context                     
-     * @param Config                      $paymentConfig              
-     * @param Quote                       $sessionQuote                
-     * @param GatewayConfig               $gatewayConfig               
-     * @param ConfigProvider              $configProvider              
-     * @param Data                        $paymentDataHelper           
-     * @param FluxxCustomerDataRequest    $fluxxCustomerDataRequest    
-     * @param FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest 
-     * @param CheckClient                 $command                     
-     * @param array                       $data                        
+     * @param Context                     $context
+     * @param Config                      $paymentConfig
+     * @param Quote                       $sessionQuote
+     * @param GatewayConfig               $gatewayConfig
+     * @param ConfigProvider              $configProvider
+     * @param Data                        $paymentDataHelper
+     * @param FluxxCustomerDataRequest    $fluxxCustomerDataRequest
+     * @param FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest
+     * @param CheckClient                 $command
+     * @param array                       $data
      */
     public function __construct(
         Context $context,
@@ -87,8 +87,8 @@ class Form extends Cc
     }
 
     /**
-     * 
-     * Fluxx Provider Config
+     * Fluxx Provider Config.
+     *
      * @return class Ui Config
      */
     public function getFluxxProviderConfig()
@@ -97,8 +97,8 @@ class Form extends Cc
     }
 
     /**
-     * 
-     * Data for Check
+     * Data for Check.
+     *
      * @return array
      */
     private function getDataForCheck()
@@ -109,26 +109,27 @@ class Form extends Cc
         if ($billingAddress->getCountryId() == 'BR') {
             $defaultCountryCode = '55';
         }
+
         return [
-            "amount" => ['total' => $this->gatewayConfig->formatPrice($quote->getGrandTotal()), 'subtotal' => ['shipping' => $this->gatewayConfig->formatPrice($quote->getShippingAmount()), 'discount' => $this->gatewayConfig->formatPrice($quote->getDiscountAmount()), 'addition' => $this->gatewayConfig->formatPrice($quote->getTaxAmount())]],
-            "cpf" => $this->fluxxTaxDocumentDataRequest->getValueForTaxDocument($quote),
-            "name" => $billingAddress->getFirstname() . ' ' . $billingAddress->getLastname(),
-            "email" => $billingAddress->getEmail(),
-            "phone" => $this->fluxxCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
-            "dateOfBirth" => $quote->getCustomerDob() ? date('Y-m-d', strtotime($quote->getCustomerDob())) : '1985-10-10'
+            'amount'      => ['total' => $this->gatewayConfig->formatPrice($quote->getGrandTotal()), 'subtotal' => ['shipping' => $this->gatewayConfig->formatPrice($quote->getShippingAmount()), 'discount' => $this->gatewayConfig->formatPrice($quote->getDiscountAmount()), 'addition' => $this->gatewayConfig->formatPrice($quote->getTaxAmount())]],
+            'cpf'         => $this->fluxxTaxDocumentDataRequest->getValueForTaxDocument($quote),
+            'name'        => $billingAddress->getFirstname().' '.$billingAddress->getLastname(),
+            'email'       => $billingAddress->getEmail(),
+            'phone'       => $this->fluxxCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
+            'dateOfBirth' => $quote->getCustomerDob() ? date('Y-m-d', strtotime($quote->getCustomerDob())) : '1985-10-10',
         ];
     }
 
-     /**
-     * 
-     * Command CheckClient
+    /**
+     * Command CheckClient.
+     *
      * @return array
      */
     public function getRequestFinancing()
     {
         $data = $this->getDataForCheck();
         $financing = [];
-       
+
         $result = $this->command->placeRequest($data);
         if ($result['RESULT_CODE'] == 1) {
             foreach ($result['offers'] as $key => $offers) {
@@ -139,20 +140,22 @@ class Form extends Cc
         } else {
             $this->processBadRequest($result);
         }
-        
-      
+
         return $financing;
     }
 
     /**
-     * Return response for bad request
+     * Return response for bad request.
+     *
      * @param array $response
+     *
      * @return array
      */
     private function processBadRequest($response)
     {
         $financing = [];
         $financing['availability'] = false;
+
         return $financing;
     }
 }

@@ -15,7 +15,6 @@ use Magento\Quote\Api\Data\PaymentInterface;
  */
 class DataAssignObserver extends AbstractDataAssignObserver
 {
-   
     /**
      * @const rg
      */
@@ -61,7 +60,7 @@ class DataAssignObserver extends AbstractDataAssignObserver
         self::PAYER_BIRTH_CITY,
         self::PAYER_BIRTH_REGION,
         self::PAYER_GENDER,
-        self::PAYER_DOB
+        self::PAYER_DOB,
     ];
 
     /**

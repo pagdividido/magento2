@@ -81,7 +81,7 @@ class Accept extends Action implements CsrfAwareActionInterface
     public function execute()
     {
         $resultJson = $this->resultJsonFactory->create();
-        $response = file_get_contents('php://input');
+        $response = $this->getRequest()->getContent();
         $originalNotification = json_decode($response, true);
 
         $gatewayDataOrderId = $originalNotification['ownId'];

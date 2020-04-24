@@ -56,4 +56,7 @@
 "The subtotal purchase is required","É obrigatório informar o total de sua compra, por favor entre em contato com o administrador da loja",
 "The place of birth (city) is required","É obrigatório informar a cidade em que nasceu"
 "The place of birth (state/region) is required","É obrigatório informar o estado (U.F.) que nasceu",
-"he financing option is required","É obrigatório informa a opção de parcelamento escolhida"
+"he financing option is required","É obrigatório informa a opção de parcelamento escolhida",
+"You will receive a text message on the <strong>%1</strong> mobile phone to complete the credit approval process.","Você receberá uma mensagem de texto no celular da <strong>%1</strong> para finalizar o processo de aprovação de crédito."
+"Only after the end of this process will the payment be approved.","Somente após a finalização deste processo que o pagamento será aprovado."
+"It is currently not possible to obtain credit offers.","Não foi possível obter créditos para o seu perfil nesse momento, por favor escolha outro meio de pagamento."

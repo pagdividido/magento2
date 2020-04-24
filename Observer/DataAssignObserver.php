@@ -15,11 +15,7 @@ use Magento\Quote\Api\Data\PaymentInterface;
  */
 class DataAssignObserver extends AbstractDataAssignObserver
 {
-    /**
-     * @const transaction_result
-     */
-    const TRANSACTION_RESULT = 'transaction_result';
-
+   
     /**
      * @const rg
      */
@@ -59,14 +55,13 @@ class DataAssignObserver extends AbstractDataAssignObserver
      * @var array
      */
     protected $additionalInformationList = [
-        self::TRANSACTION_RESULT,
+        self::PAYER_OFFERS_NAME,
+        self::PAYER_OFFERS,
         self::PAYER_RG,
         self::PAYER_BIRTH_CITY,
         self::PAYER_BIRTH_REGION,
         self::PAYER_GENDER,
-        self::PAYER_DOB,
-        self::PAYER_OFFERS,
-        self::PAYER_OFFERS_NAME,
+        self::PAYER_DOB
     ];
 
     /**

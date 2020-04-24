@@ -87,13 +87,16 @@ class PayerDataRequest implements BuilderInterface
 
         $result = [];
 
+        $result = [
+            self::PAYER_OFFER        => $payment->getAdditionalInformation('financing')
+        ];
+        
         $result[CustomerDataRequest::CUSTOMER] = [
             self::PAYER_BIRTH_CITY   => $payment->getAdditionalInformation('birth_city'),
             self::PAYER_BIRTH_REGION => $payment->getAdditionalInformation('birth_region'),
-            self::PAYER_OFFER        => $payment->getAdditionalInformation('financing'),
-            self::PAYER_BIRTH_DATE   => date('Y-m-d', strtotime($payment->getAdditionalInformation('dob'))),
+            self::PAYER_BIRTH_DATE   => date('Y-m-d', strtotime($payment->getAdditionalInformation('dob')))
         ];
-
+        
         $result[CustomerDataRequest::CUSTOMER][TaxDocumentDataRequest::TAX_DOCUMENT][1] = [
             TaxDocumentDataRequest::TAX_DOCUMENT_TYPE   => 'RG',
             TaxDocumentDataRequest::TAX_DOCUMENT_NUMBER => $payment->getAdditionalInformation('rg'),

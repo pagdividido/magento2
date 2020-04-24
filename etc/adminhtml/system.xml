@@ -9,7 +9,7 @@
     <system>
         <section id="payment">
             <group id="fluxx_payment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label><![CDATA[<div class="fluxx-payment-logo"></div><div class="fluxx-payment-byline">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>]]></label>
+                <label><![CDATA[<div class='fluxx-payment-logo'></div><div class='fluxx-payment-byline'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>]]></label>
                 <fieldset_css>complex fluxx-payment-section</fieldset_css>
                 <frontend_model>Magento\Paypal\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>
                 <group id="attribute_relationship" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -64,7 +64,50 @@
                         <validate>required-entry validate-select</validate>
                     </field>
                 </group>
-                <group id="fluxx_magento2" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <group id="credentials" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Credentials</label>
+                    <field id="environment" translate="label select comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Environment</label>
+                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
+                        <config_path>payment/fluxx_credentials/environment</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="merchant_gateway_username" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Username</label>
+                        <depends>
+                            <field id="*/*/*/environment">production</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_username</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_key" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Key</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends>
+                            <field id="*/*/*/environment">production</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_key</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_username_sandbox" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Username - Sandbox</label>
+                        <depends>
+                            <field id="*/*/*/environment">sandbox</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_username_sandbox</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="merchant_gateway_key_sandbox" translate="label" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Merchant Gateway Key - Sandbox</label>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                        <depends>
+                            <field id="*/*/*/environment">sandbox</field>
+                        </depends>
+                        <config_path>payment/fluxx_credentials/merchant_gateway_key_sandbox</config_path>
+                        <validate>required-entry</validate>
+                    </field>
+                </group>
+                <group id="fluxx_magento2" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                         <label>Fluxx - Boleto Parcelado</label>
                         <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Enabled</label>
@@ -111,49 +154,7 @@
                             <config_path>payment/fluxx_magento2/sort_order</config_path>
                         </field>
                 </group>
-                <group id="credentials" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Credentials</label>
-                    <field id="environment" translate="label select comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
-                        <label>Environment</label>
-                        <source_model>Fluxx\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
-                        <config_path>payment/fluxx_credentials/environment</config_path>
-                        <validate>required-entry validate-select</validate>
-                    </field>
-                    <field id="merchant_gateway_username" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
-                        <label>Merchant Gateway Username</label>
-                        <depends>
-                            <field id="*/*/*/environment">production</field>
-                        </depends>
-                        <config_path>payment/fluxx_credentials/merchant_gateway_username</config_path>
-                        <validate>required-entry</validate>
-                    </field>
-                    <field id="merchant_gateway_key" translate="label" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
-                        <label>Merchant Gateway Key</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-                        <depends>
-                            <field id="*/*/*/environment">production</field>
-                        </depends>
-                        <config_path>payment/fluxx_credentials/merchant_gateway_key</config_path>
-                        <validate>required-entry</validate>
-                    </field>
-                    <field id="merchant_gateway_username_sandbox" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
-                        <label>Merchant Gateway Username - Sandbox</label>
-                        <depends>
-                            <field id="*/*/*/environment">sandbox</field>
-                        </depends>
-                        <config_path>payment/fluxx_credentials/merchant_gateway_username_sandbox</config_path>
-                        <validate>required-entry</validate>
-                    </field>
-                    <field id="merchant_gateway_key_sandbox" translate="label" type="obscure" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
-                        <label>Merchant Gateway Key - Sandbox</label>
-                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
-                        <depends>
-                            <field id="*/*/*/environment">sandbox</field>
-                        </depends>
-                        <config_path>payment/fluxx_credentials/merchant_gateway_key_sandbox</config_path>
-                        <validate>required-entry</validate>
-                    </field>
-                </group>
+                
             </group>
         </section>
     </system>

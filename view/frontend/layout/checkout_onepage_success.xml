@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Fluxx. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<body>
+    <referenceContainer name="order.success.additional.info">
+        <block class="Fluxx\Magento2\Block\Success" name="details.order.success" template="Fluxx_Magento2::success/additional.phtml" after="-" />
+    </referenceContainer>
+</body>

@@ -34,7 +34,7 @@
                 <can_review_payment>1</can_review_payment>
                 <can_deny_payment>1</can_deny_payment>
                 <can_accept_payment>1</can_accept_payment>
-                <min_order_total>2000</min_order_total>
+                <min_order_total>500</min_order_total>
                 <max_order_total>200000</max_order_total>
                 <allowspecific>1</allowspecific>
                 <specificcountry>BR</specificcountry>

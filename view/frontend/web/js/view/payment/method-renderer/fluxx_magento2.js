@@ -10,9 +10,10 @@ define(
         'Magento_Checkout/js/view/payment/default',
         'mage/url',
         'Magento_Checkout/js/model/full-screen-loader',
-        'Fluxx_Magento2/js/view/payment/method-renderer/jquery.mask'
+        'Fluxx_Magento2/js/view/payment/method-renderer/jquery.mask',
+        'mage/translate'
     ],
-    function ($, Component, urlBuild, fullScreenLoader, mask) {
+    function ($, Component, urlBuild, fullScreenLoader, mask, $t) {
         'use strict';
 
         return Component.extend({
@@ -57,32 +58,36 @@ define(
                     data: { dob: $('#fluxx_magento2_dob').val() },
                     beforeSend : function(){
                       $("#fluxx_magento2_button").show();
-                      $(".messages-not-availability").html("");
+                      $(".messages-not-availability-messages").hide().removeClass("message");
                       $("#fluxx_magento2_financing_name_global").show();
                       fullScreenLoader.startLoader();
                     }
                 }).done(function (data) {
                     if(data.availability) {
                          $("#fluxx_magento2_financing").html("");
-                         $("#fluxx_magento2_financing").append('<option>Escolha seu parcelamento</option>');
+                         $("#fluxx_magento2_financing").append('<option>' + $t('Select the installment offer') +'</option>');
                         _.map(data.offers, function(value, key) {
                             $("#fluxx_magento2_financing").append('<option value="'+key+'">'+value+'</option>');
                         });
                         $("#fluxx_magento2_financing_name").html(data.institution);
                         $("#fluxx_magento2_financing_name_value").val(data.institution);
                     } else {
-                        $("#fluxx_magento2_button").hide();
-                        $("#fluxx_magento2_financing_name_global").hide();
-                        $(".messages-not-availability").append('No momento não foi possível liberar crédito para você.');
+                       self.setNotAvailability();
                     }
                     fullScreenLoader.stopLoader();
                     return data;
                 }).fail(function(data){
-                    $("#fluxx_magento2_button").hide();
-                    $("#fluxx_magento2_financing_name_global").hide();
-                    $(".messages-not-availability").append('No momento não foi possível liberar crédito para você.');
+                    self.setNotAvailability();
                     fullScreenLoader.stopLoader();
                 });
+            },
+
+            setNotAvailability: function() {
+                $("#fluxx_magento2_button").hide();
+                $("#fluxx_magento2_financing_name_global").hide();
+                $(".messages-not-availability-messages").show().addClass("message");
+                $(".messages-not-availability-text").html("");
+                $(".messages-not-availability-text").append($t('It is currently not possible to obtain credit offers.'));
             },
 
             getFinancing: function() {

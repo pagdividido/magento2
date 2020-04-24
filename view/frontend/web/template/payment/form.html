@@ -24,14 +24,17 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
+        <div class="messages">
+            <div class="messages-not-availability-messages message-error error">
+                <div class="messages-not-availability-text">
+                </div>
+            </div>
+        </div>
         <form class="form" id="co-payment-form" method="post" afterRender="initFormElement">
             <fieldset data-bind="attr: {class: 'fieldset payment items ccard ' + getCode(), id: 'payment_form_' + getCode()}">
                <render args="addtionalForm" />
             </fieldset>
         </form>
-        <div class="messages-not-availability">
-            
-        </div>
         <div class="checkout-agreements-block">
             <each args="$parent.getRegion('before-place-order')" render="" />
         </div>

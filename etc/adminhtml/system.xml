@@ -9,7 +9,7 @@
     <system>
         <section id="payment">
             <group id="fluxx_payment" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label><![CDATA[<div class='fluxx-payment-logo'></div><div class='fluxx-payment-byline'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>]]></label>
+                <label><![CDATA[<div class='fluxx-payment-logo'></div><div class='fluxx-payment-byline'>Fluxx is a new form of payment for e-commerce. Connects credit partners to offer financing at the time of purchase with high consumer approval rates. Generates more sales by allowing installment payment in online purchases.</div>]]></label>
                 <fieldset_css>complex fluxx-payment-section</fieldset_css>
                 <frontend_model>Magento\Paypal\Block\Adminhtml\System\Config\Fieldset\Payment</frontend_model>
                 <group id="attribute_relationship" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

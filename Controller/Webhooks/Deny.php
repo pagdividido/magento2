@@ -28,7 +28,7 @@ class Deny extends Action implements CsrfAwareActionInterface
      */
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
     {
-        if($request) {
+        if ($request) {
             return null;
         }
     }
@@ -42,7 +42,7 @@ class Deny extends Action implements CsrfAwareActionInterface
      */
     public function validateForCsrf(RequestInterface $request): ?bool
     {
-        if($request) {
+        if ($request) {
             return true;
         }
     }

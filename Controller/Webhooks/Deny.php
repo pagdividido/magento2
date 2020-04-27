@@ -28,7 +28,9 @@ class Deny extends Action implements CsrfAwareActionInterface
      */
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
     {
-        return null;
+        if($request) {
+            return null;
+        }
     }
 
     /**
@@ -40,7 +42,9 @@ class Deny extends Action implements CsrfAwareActionInterface
      */
     public function validateForCsrf(RequestInterface $request): ?bool
     {
-        return true;
+        if($request) {
+            return true;
+        }
     }
 
     /**
@@ -96,9 +100,7 @@ class Deny extends Action implements CsrfAwareActionInterface
         if ($storeDataOfferId == $gatewayDataOfferId) {
             $this->logger->debug('Deny '.$storeDataOfferId);
             $this->logger->debug($response);
-
             $payment = $order->getPayment();
-            $transactionId = $payment->getLastTransId();
             if (!$order->canCancel()) {
                 try {
                     $payment->deny();

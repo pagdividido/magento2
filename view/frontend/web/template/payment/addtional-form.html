@@ -86,11 +86,7 @@
                 class="select"
                 data-bind="
                           attr: {id: getCode() + '_financing', 'data-validate': JSON.stringify({required:true})},
-                          options: getFinancing(),
-                          optionsValue: 'value',
-                          optionsText: 'financing',
-                          optionsCaption: $t('Select the installment offer'),
-                          value: financing"
+                          optionsCaption: $t('Select the installment offer')"
                           >
         </select>
     </div>

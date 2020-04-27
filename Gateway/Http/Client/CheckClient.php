@@ -86,7 +86,7 @@ class CheckClient implements ClientInterface
             $data = $this->json->unserialize($responseBody);
             if (!empty($data['offers'])) {
                 $response = array_merge(
-                    ['RESULT_CODE' => 0],
+                    ['RESULT_CODE' => 1],
                     $data
                 );
             } else {

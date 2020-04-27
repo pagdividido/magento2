@@ -2,18 +2,17 @@
  * Copyright © Fluxx. All rights reserved.
  * See COPYING.txt for license details.
  */
-/*browser:true*/
-/*global define*/
 define(
     [
-        'jquery',
-        'Magento_Checkout/js/view/payment/default',
-        'mage/url',
-        'Magento_Checkout/js/model/full-screen-loader',
-        'Fluxx_Magento2/js/view/payment/method-renderer/jquery.mask',
-        'mage/translate'
+        "underscore",
+        "jquery",
+        "Magento_Checkout/js/view/payment/default",
+        "mage/url",
+        "Magento_Checkout/js/model/full-screen-loader",
+        "Fluxx_Magento2/js/view/payment/method-renderer/jquery.mask",
+        "mage/translate"
     ],
-    function ($, Component, urlBuild, fullScreenLoader, mask, $t) {
+    function (_, $, Component, urlBuild, fullScreenLoader, mask, $t) {
         'use strict';
 
         return Component.extend({
@@ -25,13 +24,13 @@ define(
             initObservable: function () {
                 this._super()
                     .observe([
-                        'rg',
-                        'birthCity',
-                        'birthRegion',
-                        'financing',
-                        'financingName',
-                        'availability',
-                        'dob'
+                        "rg",
+                        "birthCity",
+                        "birthRegion",
+                        "financing",
+                        "financingName",
+                        "availability",
+                        "dob"
                     ]);
                 return this;
             },
@@ -52,9 +51,9 @@ define(
                 var urlCheck = urlBuild.build("fluxx/CreditRating/check/form_key/"+form_key);
                 $.ajax({
                     url: urlCheck,
-                    dataType: 'json',
+                    dataType: "json",
                     timeout: 55000,
-                    type : 'post',
+                    type : "post",
                     data: { dob: $('#fluxx_magento2_dob').val() },
                     beforeSend : function(){
                       $("#fluxx_magento2_button").show();
@@ -65,7 +64,7 @@ define(
                 }).done(function (data) {
                     if(data.availability) {
                          $("#fluxx_magento2_financing").html("");
-                         $("#fluxx_magento2_financing").append('<option>' + $t('Select the installment offer') +'</option>');
+                         $("#fluxx_magento2_financing").append("<option>" + $t('Select the installment offer') +"</option>");
                         _.map(data.offers, function(value, key) {
                             $("#fluxx_magento2_financing").append('<option value="'+key+'">'+value+'</option>');
                         });
@@ -87,17 +86,9 @@ define(
                 $("#fluxx_magento2_financing_name_global").hide();
                 $(".messages-not-availability-messages").show().addClass("message");
                 $(".messages-not-availability-text").html("");
-                $(".messages-not-availability-text").append($t('It is currently not possible to obtain credit offers.'));
+                $(".messages-not-availability-text").append($t("It is currently not possible to obtain credit offers."));
             },
 
-            getFinancing: function() {
-                return _.map(window.checkoutConfig.payment.fluxx_magento2.checkOffers.offers, function(value, key) {
-                    return {
-                        'value': key,
-                        'financing': value
-                    }
-                });
-            },
             getFinancingName: function() {
                 return window.checkoutConfig.payment.fluxx_magento2.checkOffers.institution;
             },
@@ -125,18 +116,18 @@ define(
                      this.placeOrder();
                 }
             },
-
+            
             getData: function() {
                 return {
                     'method': this.item.method,
                     'additional_data': {
-                        'rg':this.rg(),
-                        'birth_city': this.birthCity(),
-                        'birth_region': this.birthRegion(),
-                        'financing': this.financing(),
-                        'financing_name': $('#'+this.getCode()+'_financing_name_value').val(),
-                        'availability': this.availability(),
-                        'dob': this.dob()
+                        "rg":this.rg(),
+                        "birth_city": this.birthCity(),
+                        "birth_region": this.birthRegion(),
+                        "financing": this.financing(),
+                        "financing_name": $('#'+this.getCode()+"_financing_name_value").val(),
+                        "availability": this.availability(),
+                        "dob": this.dob()
                     }
                 };
             },
@@ -144,8 +135,8 @@ define(
             getBirthRegion: function() {
                 return _.map(window.checkoutConfig.payment.fluxx_magento2.birthRegion, function(value, key) {
                     return {
-                        'value': key,
-                        'birth_region': value
+                        "value": key,
+                        "birth_region": value
                     }
                 });
             },

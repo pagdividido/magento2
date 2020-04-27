@@ -85,7 +85,7 @@ class Accept extends Action implements CsrfAwareActionInterface
         $originalNotification = json_decode($response, true);
 
         $gatewayDataOrderId = $originalNotification['ownId'];
-        $gatewayDataOfferId = $originalNotification['offerUUID'];
+        $gatewayDataOfferId = $originalNotification['orderUUID'];
         $order = $this->orderFactory->create()->loadByIncrementId($gatewayDataOrderId);
         $storeDataOfferId = $order->getExtOrderId();
 

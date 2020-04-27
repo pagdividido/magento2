@@ -132,7 +132,7 @@ class Form extends Cc
 
         $result = $this->command->placeRequest($data);
         if ($result['RESULT_CODE'] == 1) {
-            foreach ($result['offers'] as $key => $offers) {
+            foreach ($result['offers'] as $offers) {
                 $financing['offers'][$offers['uuid']] = $offers['offerDescription'];
             }
             $financing['institution'] = $result['institution']['bankName'];

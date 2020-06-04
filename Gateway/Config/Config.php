@@ -27,7 +27,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @const string
      */
-    const ENDPOINT_PRODUCTION = 'https://api.moip.com.br';
+    const ENDPOINT_PRODUCTION = 'https://api.fluxx.com.br/v1';
 
     /**
      * endpoint of sandbox.

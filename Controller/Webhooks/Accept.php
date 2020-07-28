@@ -25,7 +25,9 @@ class Accept extends Action implements CsrfAwareActionInterface
      */
     public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
     {
-        return null;
+        if ($request) {
+            return null;
+        }
     }
 
     /**
@@ -37,7 +39,9 @@ class Accept extends Action implements CsrfAwareActionInterface
      */
     public function validateForCsrf(RequestInterface $request): ?bool
     {
-        return true;
+        if ($request) {
+            return true;
+        }
     }
 
     /**
@@ -92,9 +96,7 @@ class Accept extends Action implements CsrfAwareActionInterface
         if ($storeDataOfferId == $gatewayDataOfferId) {
             $this->logger->debug('Accept '.$storeDataOfferId);
             $this->logger->debug($response);
-
             $payment = $order->getPayment();
-            $transactionId = $payment->getLastTransId();
             if (!$order->getInvoiceCollection()->count()) {
                 try {
                     $payment->accept();

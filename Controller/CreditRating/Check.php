@@ -133,9 +133,14 @@ class Check extends Action
                 $financing['institution'] = $result['institution']['bankName'];
                 $financing['availability'] = true;
                 $response->setData($financing);
+            } else if ($result['RESULT_CODE'] == 2){
+                $financing['conditionalValue'] = $result['conditionalValue'];
+                $financing['conditionalAvailability'] = true;
+                $response->setData($financing);
             } else {
                 $this->processBadRequest($response);
             }
+
         } catch (\Exception $e) {
             $this->logger->critical($e);
 

@@ -56,12 +56,13 @@ define(
                     data: { dob: date},
                     beforeSend : function(){
                       $("#fluxx_magento2_button").show();
-                      $(".messages-not-availability-messages").hide().removeClass("message");
+                      $(".messages-availability-messages").hide().removeClass("message error notice success");
                       $("#fluxx_magento2_financing_name_global").show();
                       fullScreenLoader.startLoader();
                     }
                 }).done(function (data) {
                     if(data.availability) {
+                        self.setAvailability();
                          $("#fluxx_magento2_financing").html("");
                          var optionsCaption = "<option>" + $t("Select the installment offer") +"</option>";
                          $("#fluxx_magento2_financing").append(self.escapeHTML(optionsCaption));
@@ -71,9 +72,12 @@ define(
                         });
                         $("#fluxx_magento2_financing_name").html(data.institution);
                         $("#fluxx_magento2_financing_name_value").val(data.institution);
-                    } else {
-                       self.setNotAvailability();
-                    }
+                    } else if (data.conditionalAvailability){
+                       self.setPartialAvailability(data.conditionalValue);
+                    } else 
+                    {
+                        self.setNotAvailability();
+                     }
                     fullScreenLoader.stopLoader();
                     return data;
                 }).fail(function(data){
@@ -85,9 +89,23 @@ define(
             setNotAvailability: function() {
                 $("#fluxx_magento2_button").hide();
                 $("#fluxx_magento2_financing_name_global").hide();
-                $(".messages-not-availability-messages").show().addClass("message");
-                $(".messages-not-availability-text").html("");
-                $(".messages-not-availability-text").append($t("It is currently not possible to obtain credit offers."));
+                $(".messages-availability-messages").show().addClass("error message");
+                $(".messages-availability-text").html("");
+                $(".messages-availability-text").append($t("It is currently not possible to obtain credit offers."));
+            },
+
+            setAvailability: function() {
+                $(".messages-availability-messages").show().addClass("success message");
+                $(".messages-availability-text").html("");
+                $(".messages-availability-text").append($t("Great! Your credit has been pre-approved. Please select the amount of installments and finish your order."));
+            },
+
+            setPartialAvailability: function(preapprovedvalue) {
+                $("#fluxx_magento2_button").hide();
+                $("#fluxx_magento2_financing_name_global").hide();
+                $(".messages-availability-messages").show().addClass("notice message");
+                $(".messages-availability-text").html("");
+                $(".messages-availability-text").append($t("Pre-approved value of US$ (preapprovedvalue). Please change your order total value to procced").replace('(preapprovedevalue)', preapprovedvalue));
             },
 
             getFinancingName: function() {

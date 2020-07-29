@@ -140,9 +140,8 @@ class Form extends Cc
         } else if ($result['RESULT_CODE'] == 2){
             $financing['conditionalValue'] = $result['conditionalValue'];
             $financing['conditionalAvailability'] = true;
-            $response->setData($financing);
         } else {
-            $this->processBadRequest($response);
+            $this->processBadRequest($result);
         }
 
         return $financing;

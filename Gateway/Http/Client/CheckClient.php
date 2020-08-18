@@ -89,7 +89,7 @@ class CheckClient implements ClientInterface
                     ['RESULT_CODE' => 1],
                     $data
                 );
-            } else if($data['conditionalAvailability']) {
+            } else if(!empty($data['conditionalAvailability'])) {
                 $response = array_merge(
                     ['RESULT_CODE' => 2],
                     $data

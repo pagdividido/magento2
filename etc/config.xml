@@ -16,7 +16,7 @@
                 <model>Magento2Facade</model>
                 <order_status>payment_review</order_status>
                 <payment_action>authorize</payment_action>
-                <title>Boleto Parcelado via Fluxx</title>
+                <title>Credito Digital via Fluxx</title>
                 <currency>BRL</currency>
                 <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
                 <paymentInfoKeys>financing_name,rg,dob,financing,device,birth_city,birth_region,gender</paymentInfoKeys>

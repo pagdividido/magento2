@@ -117,7 +117,7 @@ define(
             },
             getIconHtml: function () {
                 return '<img src="' + this.getLogoUrl() +
-                    '" alt="Fluxx" title="Boleto Parcelado" />';
+                    '" alt="Fluxx" title="Credito Digital" />';
             },
             getCode: function() {
                 return "fluxx_magento2";

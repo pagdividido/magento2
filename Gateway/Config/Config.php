@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Config;
+namespace PagDividido\Magento2\Gateway\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\EncryptorInterface;
@@ -27,14 +27,14 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @const string
      */
-    const ENDPOINT_PRODUCTION = 'https://api.fluxx.com.br/v1';
+    const ENDPOINT_PRODUCTION = 'https://api.pagdividido.com.br/v1';
 
     /**
      * endpoint of sandbox.
      *
      * @const string
      */
-    const ENDPOINT_SANDBOX = 'https://sandbox.fluxx.com.br/v1';
+    const ENDPOINT_SANDBOX = 'https://sandbox.pagdividido.com.br/v1';
 
     /**
      * Client name.
@@ -55,14 +55,14 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @const string
      */
-    const PATTERN_FOR_ATTRIBUTES = 'fluxx_attribute_relationship';
+    const PATTERN_FOR_ATTRIBUTES = 'pagdividido_attribute_relationship';
 
     /**
      * Config Pattern for Credentials.
      *
      * @const string
      */
-    const PATTERN_FOR_CREDENTIALS = 'fluxx_credentials';
+    const PATTERN_FOR_CREDENTIALS = 'pagdividido_credentials';
 
     /**
      * @var ScopeConfigInterface

@@ -1,7 +1,7 @@
-# Fluxx Magento 2
-![Fluxx](view/adminhtml/web/images/logo.svg)
+# PagDividido Magento 2
+![PagDividido](view/adminhtml/web/images/logo.svg)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c8e5a8ae6354821bf2f990a4d0ff397)](https://www.codacy.com/manual/DevMagentoFluxx/magento2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevMagentoFluxx/magento2&amp;utm_campaign=Badge_Grade) ![StyleCI](https://github.styleci.io/repos/257997111/shield?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c8e5a8ae6354821bf2f990a4d0ff397)](https://www.codacy.com/manual/PagDividido/magento2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pagdividido/magento2&amp;utm_campaign=Badge_Grade) ![StyleCI](https://github.styleci.io/repos/257997111/shield?branch=master)
 
 ## Extension features
 
@@ -16,21 +16,21 @@ We recommend installing by [composer](README.md#via-composer), but you can also 
 ### Composer (recommend)
 
 ``` sh
-composer require fluxxbrasil/magento2
+composer require pagdividido/magento2
 ```
 
 ### Manually
 
-*   [Download](https://github.com/fluxxbrasil/magento2/archive/master.zip)
+*   [Download](https://github.com/pagdividido/magento2/archive/master.zip)
 *   On your computer unzip the file
 *   Navigate to the [root directory](https://devdocs.magento.com/guides/v2.3/install-gde/basics/basics_docroot.html) of the Magento 2
-*   On your server create folder Fluxx in public_html/app/code/
-*   Send folder Magento2 to public_html/app/code/Fluxx
+*   On your server create folder PagDividido in public_html/app/code/
+*   Send folder Magento2 to public_html/app/code/PagDividido
 
 #### Enable
 
 ``` sh
-php bin/magento module:enable Fluxx_Magento2
+php bin/magento module:enable PagDividido_Magento2
 bin/magento setup:upgrade --keep-generated 
 ```
 
@@ -40,7 +40,7 @@ After installation follow the steps in the **order** presented:
 
 Attribute Relationship Definition:
 
-In STORES -> Configuration -> Payment Method -> Fluxx -> Attribute Relationship Definition
+In STORES -> Configuration -> Payment Method -> PagDividido -> Attribute Relationship Definition
 
 *   The CPF will be an attribute obtained from the
 *   The CPF attribute is
@@ -49,7 +49,7 @@ In STORES -> Configuration -> Payment Method -> Fluxx -> Attribute Relationship 
 *   The address district is
 *   The address complement is
 
-In STORES -> Configuration -> Payment Method -> Fluxx -> Credentials
+In STORES -> Configuration -> Payment Method -> PagDividido -> Credentials
 
 *   Environment
 *   Merchant Gateway Username

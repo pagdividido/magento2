@@ -1,16 +1,16 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Block;
+namespace PagDividido\Magento2\Block;
 
-use Fluxx\Magento2\Gateway\Config\Config as GatewayConfig;
-use Fluxx\Magento2\Gateway\Http\Client\CheckClient;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest as FluxxCustomerDataRequest;
-use Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest as FluxxTaxDocumentDataRequest;
-use Fluxx\Magento2\Model\Ui\ConfigProvider;
+use PagDividido\Magento2\Gateway\Config\Config as GatewayConfig;
+use PagDividido\Magento2\Gateway\Http\Client\CheckClient;
+use PagDividido\Magento2\Gateway\Request\CustomerDataRequest as PagDivididoCustomerDataRequest;
+use PagDividido\Magento2\Gateway\Request\TaxDocumentDataRequest as PagDivididoTaxDocumentDataRequest;
+use PagDividido\Magento2\Model\Ui\ConfigProvider;
 use Magento\Backend\Model\Session\Quote;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Payment\Block\Form\Cc;
@@ -43,14 +43,14 @@ class Form extends Cc
     private $paymentDataHelper;
 
     /**
-     * @var fluxxCustomerDataRequest
+     * @var PagDivididoCustomerDataRequest
      */
-    private $fluxxCustomerDataRequest;
+    private $PagDivididoCustomerDataRequest;
 
     /**
-     * @var fluxxTaxDocumentDataRequest
+     * @var PagDivididoTaxDocumentDataRequest
      */
-    private $fluxxTaxDocumentDataRequest;
+    private $PagDivididoTaxDocumentDataRequest;
 
     /**
      * @param Context                     $context
@@ -59,8 +59,8 @@ class Form extends Cc
      * @param GatewayConfig               $gatewayConfig
      * @param ConfigProvider              $configProvider
      * @param Data                        $paymentDataHelper
-     * @param FluxxCustomerDataRequest    $fluxxCustomerDataRequest
-     * @param FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest
+     * @param PagDivididoCustomerDataRequest    $PagDivididoCustomerDataRequest
+     * @param PagDivididoTaxDocumentDataRequest $PagDivididoTaxDocumentDataRequest
      * @param CheckClient                 $command
      * @param array                       $data
      */
@@ -71,8 +71,8 @@ class Form extends Cc
         GatewayConfig $gatewayConfig,
         ConfigProvider $configProvider,
         Data $paymentDataHelper,
-        FluxxCustomerDataRequest $fluxxCustomerDataRequest,
-        FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest,
+        PagDivididoCustomerDataRequest $PagDivididoCustomerDataRequest,
+        PagDivididoTaxDocumentDataRequest $PagDivididoTaxDocumentDataRequest,
         CheckClient $command,
         array $data = []
     ) {
@@ -81,17 +81,17 @@ class Form extends Cc
         $this->gatewayConfig = $gatewayConfig;
         $this->configProvider = $configProvider;
         $this->paymentDataHelper = $paymentDataHelper;
-        $this->fluxxCustomerDataRequest = $fluxxCustomerDataRequest;
-        $this->fluxxTaxDocumentDataRequest = $fluxxTaxDocumentDataRequest;
+        $this->PagDivididoCustomerDataRequest = $PagDivididoCustomerDataRequest;
+        $this->PagDivididoTaxDocumentDataRequest = $PagDivididoTaxDocumentDataRequest;
         $this->command = $command;
     }
 
     /**
-     * Fluxx Provider Config.
+     * PagDividido Provider Config.
      *
      * @return class Ui Config
      */
-    public function getFluxxProviderConfig()
+    public function getPagDivididoProviderConfig()
     {
         return $this->configProvider->getConfig();
     }
@@ -112,10 +112,10 @@ class Form extends Cc
 
         return [
             'amount'      => ['total' => $this->gatewayConfig->formatPrice($quote->getGrandTotal()), 'subtotal' => ['shipping' => $this->gatewayConfig->formatPrice($quote->getShippingAmount()), 'discount' => $this->gatewayConfig->formatPrice($quote->getDiscountAmount()), 'addition' => $this->gatewayConfig->formatPrice($quote->getTaxAmount())]],
-            'cpf'         => $this->fluxxTaxDocumentDataRequest->getValueForTaxDocument($quote),
+            'cpf'         => $this->PagDivididoTaxDocumentDataRequest->getValueForTaxDocument($quote),
             'name'        => $billingAddress->getFirstname().' '.$billingAddress->getLastname(),
             'email'       => $billingAddress->getEmail(),
-            'phone'       => $this->fluxxCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
+            'phone'       => $this->PagDivididoCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
             'dateOfBirth' => $quote->getCustomerDob() ? date('Y-m-d', strtotime($quote->getCustomerDob())) : '1985-10-10',
         ];
     }

@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Block;
+namespace PagDividido\Magento2\Block;
 
 use Magento\Framework\Phrase;
 use Magento\Payment\Block\ConfigurableInfo;

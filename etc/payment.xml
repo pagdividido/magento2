@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
 <payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
     <groups>
-        <group id="fluxx_group">
-            <label>Fluxx</label>
+        <group id="pagdividido_group">
+            <label>PagDividido</label>
         </group>
     </groups>
     <methods>
-        <method name="fluxx_magento2">
+        <method name="pagdividido_magento2">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
     </methods>

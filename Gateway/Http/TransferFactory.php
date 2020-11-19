@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Http;
+namespace PagDividido\Magento2\Gateway\Http;
 
 use Magento\Payment\Gateway\Http\TransferBuilder;
 use Magento\Payment\Gateway\Http\TransferFactoryInterface;

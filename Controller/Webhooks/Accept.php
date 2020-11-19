@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Controller\Webhooks;
+namespace PagDividido\Magento2\Controller\Webhooks;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;

@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Data\Order;
+namespace PagDividido\Magento2\Gateway\Data\Order;
 
 use Magento\Payment\Gateway\Data\AddressAdapterInterface;
 use Magento\Sales\Api\Data\OrderAddressInterface;

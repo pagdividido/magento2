@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Http\Client;
+namespace PagDividido\Magento2\Gateway\Http\Client;
 
-use Fluxx\Magento2\Gateway\Config\Config;
+use PagDividido\Magento2\Gateway\Config\Config;
 use InvalidArgumentException;
 use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;

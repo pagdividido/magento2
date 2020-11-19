@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Request;
+namespace PagDividido\Magento2\Gateway\Request;
 
-use Fluxx\Magento2\Gateway\SubjectReader;
+use PagDividido\Magento2\Gateway\SubjectReader;
 use Magento\Framework\HTTP\Header as HeaderClient;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
 use Magento\Payment\Gateway\Request\BuilderInterface;

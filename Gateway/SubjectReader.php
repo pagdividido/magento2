@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
 declare(strict_types=1);
 
-namespace Fluxx\Magento2\Gateway;
+namespace PagDividido\Magento2\Gateway;
 
 use Magento\Checkout\Model\Session;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;

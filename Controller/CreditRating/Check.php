@@ -1,15 +1,15 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Controller\CreditRating;
+namespace PagDividido\Magento2\Controller\CreditRating;
 
-use Fluxx\Magento2\Gateway\Config\Config;
-use Fluxx\Magento2\Gateway\Http\Client\CheckClient;
-use Fluxx\Magento2\Gateway\Request\CustomerDataRequest as FluxxCustomerDataRequest;
-use Fluxx\Magento2\Gateway\Request\TaxDocumentDataRequest as FluxxTaxDocumentDataRequest;
+use PagDividido\Magento2\Gateway\Config\Config;
+use PagDividido\Magento2\Gateway\Http\Client\CheckClient;
+use PagDividido\Magento2\Gateway\Request\CustomerDataRequest as PagDivididoCustomerDataRequest;
+use PagDividido\Magento2\Gateway\Request\TaxDocumentDataRequest as PagDivididoTaxDocumentDataRequest;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
@@ -43,21 +43,21 @@ class Check extends Action
     private $config;
 
     /**
-     * @var fluxxCustomerDataRequest
+     * @var PagDivididoCustomerDataRequest
      */
-    private $fluxxCustomerDataRequest;
+    private $PagDivididoCustomerDataRequest;
 
     /**
-     * @var fluxxTaxDocumentDataRequest
+     * @var PagDivididoTaxDocumentDataRequest
      */
-    private $fluxxTaxDocumentDataRequest;
+    private $PagDivididoTaxDocumentDataRequest;
 
     /**
      * @param Context                     $context
      * @param Config                      $config
      * @param CheckoutSession             $checkoutSession
-     * @param FluxxCustomerDataRequest    $fluxxCustomerDataRequest
-     * @param FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest
+     * @param PagDivididoCustomerDataRequest    $PagDivididoCustomerDataRequest
+     * @param PagDivididoTaxDocumentDataRequest $PagDivididoTaxDocumentDataRequest
      * @param CheckClient                 $command
      * @param LoggerInterface             $logger
      */
@@ -65,16 +65,16 @@ class Check extends Action
         Context $context,
         Config $config,
         CheckoutSession $checkoutSession,
-        FluxxCustomerDataRequest $fluxxCustomerDataRequest,
-        FluxxTaxDocumentDataRequest $fluxxTaxDocumentDataRequest,
+        PagDivididoCustomerDataRequest $PagDivididoCustomerDataRequest,
+        PagDivididoTaxDocumentDataRequest $PagDivididoTaxDocumentDataRequest,
         CheckClient $command,
         LoggerInterface $logger
     ) {
         parent::__construct($context);
         $this->config = $config;
         $this->checkoutSession = $checkoutSession;
-        $this->fluxxCustomerDataRequest = $fluxxCustomerDataRequest;
-        $this->fluxxTaxDocumentDataRequest = $fluxxTaxDocumentDataRequest;
+        $this->PagDivididoCustomerDataRequest = $PagDivididoCustomerDataRequest;
+        $this->PagDivididoTaxDocumentDataRequest = $PagDivididoTaxDocumentDataRequest;
         $this->logger = $logger;
         $this->command = $command;
     }
@@ -103,10 +103,10 @@ class Check extends Action
 
         return [
 
-            'cpf'         => $this->fluxxTaxDocumentDataRequest->getValueForTaxDocument($quote),
+            'cpf'         => $this->PagDivididoTaxDocumentDataRequest->getValueForTaxDocument($quote),
             'name'        => $billingAddress->getFirstname().' '.$billingAddress->getLastname(),
-            'email'       => $quote->getCustomerEmail() ? $quote->getCustomerEmail() : 'quote@fluxx.com.br',
-            'phone'       => $this->fluxxCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
+            'email'       => $quote->getCustomerEmail() ? $quote->getCustomerEmail() : 'contato@pagdividido.com.br',
+            'phone'       => $this->PagDivididoCustomerDataRequest->structurePhone($billingAddress->getTelephone(), $defaultCountryCode),
             'dateOfBirth' => $dob ? date('Y-m-d', strtotime($dob)) : '1985-10-10',
             'amount'      => ['total' => $this->config->formatPrice($quote->getGrandTotal()), 'subtotal' => ['shipping' => $this->config->formatPrice($quote->getShippingAmount()), 'discount' => $this->config->formatPrice($quote->getDiscountAmount()), 'addition' => $this->config->formatPrice($quote->getTaxAmount())]],
         ];

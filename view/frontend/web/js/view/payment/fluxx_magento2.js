@@ -1,5 +1,5 @@
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 define(
@@ -14,8 +14,8 @@ define(
         'use strict';
         rendererList.push(
             {
-                type: "fluxx_magento2",
-                component: "Fluxx_Magento2/js/view/payment/method-renderer/fluxx_magento2"
+                type: "pagdividido_magento2",
+                component: "pagdividido_magento2/js/view/payment/method-renderer/pagdividido_magento2"
             }
         );
         /** Add view logic here if needed */

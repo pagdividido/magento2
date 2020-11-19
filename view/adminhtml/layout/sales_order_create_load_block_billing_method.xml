@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -9,8 +9,8 @@
     <body>
         <referenceBlock name="order.create.billing.method.form">
             <action method="setMethodFormTemplate">
-                <argument name="method" xsi:type="string">fluxx_magento2</argument>
-                <argument name="template" xsi:type="string">Fluxx_Magento2::form/payment.phtml</argument>
+                <argument name="method" xsi:type="string">pagdividido_magento2</argument>
+                <argument name="template" xsi:type="string">pagdividido_magento2::form/payment.phtml</argument>
             </action>
         </referenceBlock>
     </body>

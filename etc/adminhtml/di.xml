@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -9,11 +9,11 @@
 	 <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="fluxx_magento2_config_provider" xsi:type="object">Fluxx\Magento2\Model\Ui\ConfigProvider</item>
+                <item name="pagdividido_magento2_config_provider" xsi:type="object">PagDividido\Magento2\Model\Ui\ConfigProvider</item>
             </argument>
         </arguments>
     </type>
-    <type name="Fluxx\Magento2\Block\Info">
+    <type name="PagDividido\Magento2\Block\Info">
         <arguments>
             <argument name="data" xsi:type="array">
                 <item xsi:type="string" name="is_secure_mode">0</item>

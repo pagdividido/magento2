@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Gateway\Validator;
+namespace PagDividido\Magento2\Gateway\Validator;
 
-use Fluxx\Magento2\Gateway\SubjectReader;
+use PagDividido\Magento2\Gateway\SubjectReader;
 use Magento\Payment\Gateway\Validator\AbstractValidator;
 use Magento\Payment\Gateway\Validator\ResultInterface;
 use Magento\Payment\Gateway\Validator\ResultInterfaceFactory;

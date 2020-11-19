@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 
-namespace Fluxx\Magento2\Model\Ui;
+namespace PagDividido\Magento2\Model\Ui;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\App\RequestInterface;
@@ -16,7 +16,7 @@ use Magento\Framework\View\Asset\Repository;
  */
 final class ConfigProvider implements ConfigProviderInterface
 {
-    const CODE = 'fluxx_magento2';
+    const CODE = 'pagdividido_magento2';
 
     /**
      * @var Repository
@@ -102,7 +102,7 @@ final class ConfigProvider implements ConfigProviderInterface
      */
     public function getLoggImageUrl()
     {
-        return $this->getViewFileUrl('Fluxx_Magento2::images/logo.svg');
+        return $this->getViewFileUrl('pagdividido_magento2::images/logo.svg');
     }
 
     /**

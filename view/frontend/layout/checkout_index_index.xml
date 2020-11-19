@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
@@ -23,10 +23,10 @@
                                                         <item name="renders" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
-                                                                <item name="fluxx_magento2" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Fluxx_Magento2/js/view/payment/fluxx_magento2</item>
+                                                                <item name="pagdividido_magento2" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">pagdividido_magento2/js/view/payment/pagdividido_magento2</item>
                                                                     <item name="methods" xsi:type="array">
-                                                                        <item name="fluxx_magento2" xsi:type="array">
+                                                                        <item name="pagdividido_magento2" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>

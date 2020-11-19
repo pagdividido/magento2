@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Fluxx. All rights reserved.
+ * Copyright © PagDividido. All rights reserved.
  * See COPYING.txt for license details.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="payment_method_assign_data_fluxx_magento2">
-        <observer name="fluxx_magento2_data_assign" instance="Fluxx\Magento2\Observer\DataAssignObserver" />
+    <event name="payment_method_assign_data_pagdividido_magento2">
+        <observer name="pagdividido_magento2_data_assign" instance="PagDividido\Magento2\Observer\DataAssignObserver" />
     </event>
 </config>

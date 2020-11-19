@@ -1,12 +1,12 @@
-<?php $configs = $block->getFluxxProviderConfig(); ?>
+<?php $configs = $block->getPagDivididoProviderConfig(); ?>
 <?php $checkOffers = $block->getRequestFinancing(); ?>
 <fieldset class="admin__fieldset payment-method"
-          id="payment_form_fluxx_magento2"
+          id="payment_form_pagdividido_magento2"
           style="display:none"
     >
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_dob" >
+            <label class="label admin__field-label" for="pagdividido_magento2_dob" >
                 <span><?= $block->escapeHtml(__('Date of Birth (dd/mm/yyyy)')) ?></span>
             </label>
             <div class="admin__field-control control">
@@ -16,7 +16,7 @@
     </div>
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_rg" >
+            <label class="label admin__field-label" for="pagdividido_magento2_rg" >
                 <span><?= $block->escapeHtml(__('R.G (Brazilian document)')) ?></span>
             </label>
             <div class="admin__field-control control">
@@ -26,7 +26,7 @@
     </div>
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_birth_city" >
+            <label class="label admin__field-label" for="pagdividido_magento2_birth_city" >
                 <span><?= $block->escapeHtml(__('City where you were born')) ?></span>
             </label>
             <div class="admin__field-control control">
@@ -36,13 +36,13 @@
     </div>
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_birth_region" >
+            <label class="label admin__field-label" for="pagdividido_magento2_birth_region" >
                 <span><?= $block->escapeHtml(__('State/Region where you were born')) ?></span>
             </label>
             <div class="admin__field-control control">
-                <select id="fluxx_magento2_birth_region" name="payment[birth_region]"
+                <select id="pagdividido_magento2_birth_region" name="payment[birth_region]"
                         class="select required-entry admin__control-select validate-select">
-                    <?php foreach ($configs['payment']['fluxx_magento2']['birthRegion'] as $typeCode => $typeName) : ?>
+                    <?php foreach ($configs['payment']['pagdividido_magento2']['birthRegion'] as $typeCode => $typeName) : ?>
                         <option value="<?= $block->escapeHtmlAttr($typeCode) ?>">
                             <?= $block->escapeHtml($typeName) ?>
                         </option>
@@ -53,11 +53,11 @@
     </div>
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_financing" >
+            <label class="label admin__field-label" for="pagdividido_magento2_financing" >
                 <span><?= $block->escapeHtml(__('Select the installment offer')) ?></span>
             </label>
             <div class="admin__field-control control">
-                <select id="fluxx_magento2_financing" name="payment[financing]"
+                <select id="pagdividido_magento2_financing" name="payment[financing]"
                         class="select required-entry admin__control-select validate-select">
                     <?php foreach ($checkOffers['offers'] as $typeCode => $typeName) : ?>
                         <option value="<?= $block->escapeHtmlAttr($typeCode) ?>">
@@ -70,7 +70,7 @@
     </div>
     <div class="field field-state admin__field required">
         <div class="admin__field _required">
-            <label class="label admin__field-label" for="fluxx_magento2_financing" >
+            <label class="label admin__field-label" for="pagdividido_magento2_financing" >
                 <span><?= $block->escapeHtml(__('Financing offered by')) ?></span>
             </label>
         </div>
